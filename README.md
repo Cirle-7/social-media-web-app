@@ -1,4 +1,4 @@
-_** Clone and push to the dev branch/a new branch before merging to main_
+_** push to the dev branch/a new branch before merging to main_
 
 ## File Structure
 
