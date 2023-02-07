@@ -3,8 +3,8 @@ import Login from './login';
 import SignUp from './signUp';
 
 function Home() {
-  const [loginDislay, setLoginDisplay] = useState(true);
-  const [signupDislay, setSignupDisplay] = useState(null);
+  const [loginDislay, setLoginDisplay] = useState(false);
+  const [signupDislay, setSignupDisplay] = useState(true);
 
   const loginPageHandler = () => {
     setLoginDisplay(true);
