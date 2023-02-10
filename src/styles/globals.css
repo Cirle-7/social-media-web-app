@@ -2,6 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* For IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .sidebar_nav {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .sidebar_nav>li {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width:768px) {
+    .sidebar_nav>li {
+      gap: .5rem;
+    }
+  }
+
+  @media screen and (min-width:1024px) {
+    .sidebar_nav>li {
+      gap: 1rem;
+    }
+  }
+
+  .sidebar_nav>li>span {
+    @apply font-semibold
+  }
+
+  .btn {
+    @apply px-2 py-1 rounded-lg flex items-center;
+  }
+
+  .postBoxItems {
+    @apply flex items-center gap-3
+  }
+
+  .postBoxItems>li {
+    @apply flex items-center gap-1 text-sm text-text-accent font-medium
+  }
+
+  .list {
+    @apply flex items-center gap-2
+  }
+
+  .list>li {
+    @apply flex items-center gap-1
+  }
+
+  .search {
+    background-image: url('/search.svg');
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: 8px;
+    padding-left: 1rem;
+  }
+}
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -36,6 +106,8 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --grey-1: #24272e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -80,10 +152,10 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
 }
 
 a {
@@ -92,7 +164,7 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
+  /* html {
     color-scheme: dark;
-  }
+  } */
 }
