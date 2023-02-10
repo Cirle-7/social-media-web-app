@@ -1,65 +1,113 @@
 import Button from '@components/ui/button';
-import {
-  BellIcon,
-  DotsHorizontalIcon,
-  EnvelopeClosedIcon,
-  ExitIcon,
-  HomeIcon,
-  PaperPlaneIcon,
-  PersonIcon,
-} from '@radix-ui/react-icons';
+import Input from '@components/ui/input';
+import { ExitIcon, PersonIcon } from '@radix-ui/react-icons';
+import Events from './events';
+import PostBox from './postBox';
+import Posts from './posts';
+import SidebarNav from './sidebarNavigation';
+import SidebarOptions from './sidebarOptions';
+import Trending from './trending';
+const mockPosts = [
+  {
+    id: 1,
+    name: 'Jogn Doe',
+    username: 'dev1',
+    date: '1 Jan',
+    text: 'I love my word',
+    likeCount: 200,
+    replyCount: 50,
+    shareCount: 60,
+    repostCount: 15,
+  },
+  {
+    id: 2,
+    name: 'Jane Doe',
+    username: 'janedoe',
+    date: '1 Jan',
+    text: 'I love my word',
+    likeCount: 200,
+    replyCount: 50,
+    shareCount: 60,
+    repostCount: 15,
+  },
+  {
+    id: 3,
+    name: 'Douglas King',
+    username: 'dougxtra',
+    date: '1 Jan',
+    text: 'I love my word',
+    likeCount: 200,
+    replyCount: 50,
+    shareCount: 60,
+    repostCount: 15,
+  },
+  {
+    id: 4,
+    name: 'Seyi Vibez',
+    username: 'seyi_vibez',
+    date: '1 Jan',
+    text: 'Santa Monica, Santa Claus, Subject verb, Maker clause, Seyi verb, Seyi vibes',
+    likeCount: 1200,
+    replyCount: 1050,
+    shareCount: 600,
+    repostCount: 155,
+  },
+  {
+    id: 5,
+    name: 'Divine',
+    username: 'heisrema',
+    date: '1 Jan',
+    text: 'I love my word',
+    likeCount: 120000,
+    replyCount: 700,
+    shareCount: 6000,
+    repostCount: 1500,
+  },
+  {
+    id: 6,
+    name: 'Dan',
+    username: 'danabramov',
+    date: '1 Jan',
+    text: 'I love my word',
+    likeCount: 200,
+    replyCount: 50,
+    shareCount: 60,
+    repostCount: 15,
+  },
+  {
+    id: 7,
+    name: 'Vercel',
+    username: 'vercel',
+    date: '1 Jan',
+    text: 'I love my word',
+    likeCount: 200,
+    replyCount: 50,
+    shareCount: 60,
+    repostCount: 15,
+  },
+  {
+    id: 8,
+    name: 'Circle',
+    username: 'circle',
+    date: '1 Jan',
+    text: 'I love my word',
+    likeCount: 200,
+    replyCount: 50,
+    shareCount: 60,
+    repostCount: 15,
+  },
+];
 
 const Feed = () => {
   return (
     <div className="bg-primary text-black flex">
-      <section className="hidden border border-solid border-black w-20 md:grid h-[100vh] overflow-y-scroll">
+      {/** Left Sidebar / User Options */}
+      <section className="hidden w-20 md:grid h-[100vh] overflow-y-scroll scrollbar-hide">
         <div className="grid place-items-center py-[1rem]  ">
           <h2>LOGO</h2>
 
-          <div className="bg-accent py-3 px-3 w-fit mt-[2rem] ">
-            <ul className="sidebar_nav">
-              <li>
-                <HomeIcon /> <span>Home</span>
-              </li>
-              <li>
-                <PersonIcon /> <span> Profile</span>
-              </li>
-              <li>
-                <EnvelopeClosedIcon /> <span>Messages</span>
-              </li>
-              <li>
-                <BellIcon /> <span>Notifications</span>
-              </li>
-              <li>
-                <DotsHorizontalIcon /> <span>More</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-accent py-3 px-3 w-fit mt-[2rem] ">
-            <ul className="sidebar_nav">
-              <li>
-                <PaperPlaneIcon />{' '}
-                <span className="text-sm">Invitation Request</span>
-              </li>
-              <li>
-                <PersonIcon />{' '}
-                <span className="text-sm"> Blocked Accounts</span>
-              </li>
-              <li>
-                <EnvelopeClosedIcon />{' '}
-                <span className="text-sm"> Create Page</span>
-              </li>
-              <li>
-                <BellIcon /> <span className="text-sm">Create Group</span>
-              </li>
-              <li>
-                <DotsHorizontalIcon />{' '}
-                <span className="text-sm">Delete Account</span>
-              </li>
-            </ul>
-          </div>
-
+          <SidebarNav />
+          <SidebarOptions />
           <div className="mt-[1rem] grid place-items-center gap-1">
             <PersonIcon />
             <h2>Username</h2>
@@ -71,12 +119,60 @@ const Feed = () => {
         </div>
       </section>
 
-      <section className="border-2 border-solid border-red-400 w-60 ">
-        feed
+      {/**Feed Section */}
+      <section className="w-[100vw] md:w-[55vw] h-[100vh] overflow-y-scroll scrollbar-hide">
+        <div className="grid place-items-center ">
+          {/** Mobile Header */}
+          <section className="bg-accent flex items-center w-screen md:hidden px-2 py-3  fixed top-0">
+            <div className="ml-[.5rem] w-[30px] h-[30px] rounded-full border-2 border-black grid place-items-center">
+              <PersonIcon width="25" height="25" />
+            </div>
+            <h2 className="font-bold ml-[30vw]">LOGO</h2>
+          </section>
+
+          {/*Post Box*/}
+          <PostBox />
+
+          {/** Posts Section */}
+          <section className="grid gap-3 my-[4rem] md:my-3">
+            <Posts posts={mockPosts} />
+          </section>
+        </div>
       </section>
 
-      <section className="hidden border border-solid border-green-300 md:grid w-20">
-        <h2>trending</h2>
+      {/** Right Side Bar : Trending, Events & Co. */}
+      <section
+        className="md:grid bg-primary hidden border border-solid 
+        w-[25vw] h-[100vh] overflow-y-scroll  scrollbar-hide"
+      >
+        {/** Search Bar */}
+        <div className="mt-2 grid place-items-center">
+          <label htmlFor="search">
+            <Input
+              placeholder="Search SMWA"
+              name="search"
+              className="search pl-7 pr-3 py-[.5rem] rounded-full bg-accent  placeholder-text-accent
+            focus:outline-dotted focus:border-sky-600 font-semibold placeholder-opacity-75 "
+              type="text"
+            />
+          </label>
+        </div>
+
+        {/** Trending */}
+        <Trending />
+
+        {/**Events */}
+        <Events />
+
+        {/** Miscellaneous */}
+        <section className="grid grid-cols-2 gap-y-3 px-3 mt-10">
+          <span className="text-text-accent text-sm">Terms of Services</span>
+          <span className="text-text-accent text-sm">Privacy Policy</span>
+          <span className="text-text-accent text-sm">Cookies Policy</span>
+          <span className="text-text-accent text-sm">Accessibility</span>
+          <span className="text-text-accent text-sm">Ads Info</span>
+          <span className="text-text-accent text-sm">More</span>
+        </section>
       </section>
     </div>
   );

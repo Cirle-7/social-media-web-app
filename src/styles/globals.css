@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer components {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* For IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
   .sidebar_nav {
     display: grid;
     gap: 1rem;
@@ -15,12 +27,48 @@
     cursor: pointer;
   }
 
+  @media screen and (min-width:768px) {
+    .sidebar_nav>li {
+      gap: .5rem;
+    }
+  }
+
+  @media screen and (min-width:1024px) {
+    .sidebar_nav>li {
+      gap: 1rem;
+    }
+  }
+
   .sidebar_nav>li>span {
     @apply font-semibold
   }
 
   .btn {
     @apply px-2 py-1 rounded-lg flex items-center;
+  }
+
+  .postBoxItems {
+    @apply flex items-center gap-3
+  }
+
+  .postBoxItems>li {
+    @apply flex items-center gap-1 text-sm text-text-accent font-medium
+  }
+
+  .list {
+    @apply flex items-center gap-2
+  }
+
+  .list>li {
+    @apply flex items-center gap-1
+  }
+
+  .search {
+    background-image: url('/search.svg');
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: 8px;
+    padding-left: 1rem;
   }
 }
 
