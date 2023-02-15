@@ -111,7 +111,7 @@ const Feed = () => {
           <div className="mt-[1rem] grid place-items-center gap-1">
             <PersonIcon />
             <h2>Username</h2>
-            <Button className="bg-black text-white">
+            <Button className="btn bg-black text-white">
               {' '}
               <ExitIcon /> <span className="ml-2">Log Out</span>{' '}
             </Button>

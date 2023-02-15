@@ -7,7 +7,7 @@ const Button = ({
 }) => {
   return (
     <button
-      className={className === undefined ? 'btn' : `btn ${className}`}
+      className={className === undefined ? 'btn' : `${className}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
