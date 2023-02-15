@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import useValidation from 'src/hooks/use-Validation';
 import Button from '../ui/button';
@@ -52,6 +53,7 @@ function Login(props) {
       <div className="w-8/12 mx-auto mt-6">
         <form onSubmit={submitFormHandler} className="flex flex-col gap-3">
           <Input
+            id='email'
             type="email"
             value={emailState.value}
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -59,6 +61,7 @@ function Login(props) {
             onChange={emailInputHandler}
           />
           <Input
+            id='password'
             value={passwordState.value}
             type="password"
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -72,7 +75,7 @@ function Login(props) {
             >
               Back to Sign Up
             </p>
-            <p>forgot password</p>
+            <Link className='hover:cursor-pointer' href='/forgotpassword'>forgot password</Link>
           </div>
           <Button
             type="default"

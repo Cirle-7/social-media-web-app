@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import useHttp from 'src/hooks/use-Auth';
 import Login from './login';
 import SignUp from './signUp';
 
-function Home() {
-  const [loginDislay, setLoginDisplay] = useState(false);
-  const [signupDislay, setSignupDisplay] = useState(true);
+function Home({auth}) {
+  const {login, signup} = auth;
+  const [loginDislay, setLoginDisplay] = useState(true);
+  const [signupDislay, setSignupDisplay] = useState(false);
 
   const loginPageHandler = () => {
     setLoginDisplay(true);
@@ -15,14 +15,6 @@ function Home() {
     setLoginDisplay(false);
     setSignupDisplay(true);
   };
-
-  const getResp = (res) => {
-    console.log(res);
-  };
-
-  // LOGIN AND SIGNUP HANDLERS (CUSTOM HOOK)
-  const login = useHttp('/api/users/login', getResp, true);
-  const signup = useHttp('/api/users/signup', getResp, false);
 
   let content;
 
@@ -48,7 +40,7 @@ function Home() {
   return (
     <>
       <section className="min-w-full min-h-screen grid grid-cols-5">
-        <div className="min-w-full h-screen bg-slate-200 col-span-3">
+        <div className="min-w-full h-screen bg-slate-50 col-span-3">
           {signupDislay && <SignUp onClick={{ loginPageHandler, signup }} />}
           {loginDislay && <Login onClick={{ signupPageHandler, login }} />}
         </div>

@@ -82,6 +82,7 @@ function SignUp(props) {
       <div className="w-8/12 mx-auto mt-6">
         <form onSubmit={signupFormHandler} className="flex flex-col gap-3">
           <Input
+            id="username"
             type="text"
             value={userNameState.value}
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -89,6 +90,7 @@ function SignUp(props) {
             onChange={userNameInputHandler}
           />
           <Input
+            id="email"
             type="email"
             value={emailState.value}
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -96,6 +98,7 @@ function SignUp(props) {
             onChange={emailInputHandler}
           />
           <Input
+            id="password"
             type="password"
             value={passwordState.value}
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -103,13 +106,19 @@ function SignUp(props) {
             onChange={passwordInputHandler}
           />
           <Input
+            id="displayname"
             type="text"
             value={displayNameState.value}
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
             placeholder="Display name"
             onChange={displayNameInputHandler}
           />
-
+          <small className="block mt-1">
+            By signing up, you agree to the terms and condition{' '}
+            <span className="font-bold underline">Terms of services</span> and
+            privacy policy, including{' '}
+            <span className="font-bold underline">cookie use</span>
+          </small>
           <Button
             type="default"
             disabled={!formIsValid}
@@ -122,7 +131,11 @@ function SignUp(props) {
             Sign Up
           </Button>
         </form>
-        <p className="w-2 text-lg block mx-auto mt-4">or</p>
+        <div className="min-w-fit flex flex-row justify-center gap-8 mt-4 items-center">
+          <span className='text-slate-400'>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span>
+          <p className="w-2 text-lg">or</p>
+          <span className='text-slate-400'>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span>
+        </div>
         <div className="w-56 mx-auto mt-4 flex flex-col gap-3">
           <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
             Sign up with Google
@@ -133,19 +146,13 @@ function SignUp(props) {
           <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
             Sign up with Phone Number
           </Button>
+          <small className="block mt-0 mx-auto">
+            Already have an account?
+            <Button onClick={() => loginPageHandler()} className="font-bold">
+              Sign in
+            </Button>
+          </small>
         </div>
-        <small className="block mt-4">
-          By signing up, you agree to the terms and condition{' '}
-          <span className="font-bold underline">Terms of services</span> and
-          privacy policy, including{' '}
-          <span className="font-bold underline">cookie use</span>
-        </small>
-        <small className="block mt-2">
-          Already have an account?
-          <Button onClick={() => loginPageHandler()} className="font-bold">
-            Sign in
-          </Button>
-        </small>
       </div>
     </>
   );
