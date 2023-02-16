@@ -6,10 +6,17 @@ const useHttp = (url, getResponse, push = false) => {
   const postRequest = async (data) => {
     try {
       const response = await axios.post(url, data);
+      console.log({ response });
       getResponse(response);
       if (push === true) router.push('/feed');
     } catch (error) {
-      console.log(error);
+      if (error.reponse) {
+        console.log({ error: error.response });
+      } else if (error.request) {
+        console.log({ error: error.request });
+      } else if (error.message) {
+        console.log({ error });
+      }
     }
   };
   return { postRequest };

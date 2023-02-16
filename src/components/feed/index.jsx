@@ -1,6 +1,8 @@
 import Button from '@components/ui/button';
 import Input from '@components/ui/input';
+import { useUser } from '@hooks/use-User';
 import { ExitIcon, PersonIcon } from '@radix-ui/react-icons';
+import { useEffect, useState } from 'react';
 import Events from './events';
 import PostBox from './postBox';
 import Posts from './posts';
@@ -99,6 +101,17 @@ const mockPosts = [
 ];
 
 const Feed = () => {
+  const { user: userStore } = useUser();
+  const [user, setUser] = useState({});
+
+  {
+    /** because zustand is using localStorage to persist &
+   SSR pages cant't access local-storage, useEffect is used to only load the details from localSrorage on the client-sde*/
+  }
+  useEffect(() => {
+    setUser(userStore);
+  }, [userStore]);
+
   return (
     <div className="bg-primary text-black flex">
       {/** Left Sidebar / User Options */}
@@ -110,7 +123,7 @@ const Feed = () => {
           <SidebarOptions />
           <div className="mt-[1rem] grid place-items-center gap-1">
             <PersonIcon />
-            <h2>Username</h2>
+            <h2>{user.username !== null ? user.username : 'Username'}</h2>
             <Button className="btn bg-black text-white">
               {' '}
               <ExitIcon /> <span className="ml-2">Log Out</span>{' '}

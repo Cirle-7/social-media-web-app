@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Login from './login';
 import SignUp from './signUp';
 
-function Home({auth}) {
-  const {login, signup} = auth;
+function Home({ auth }) {
+  const { login, signup } = auth;
   const [loginDislay, setLoginDisplay] = useState(true);
   const [signupDislay, setSignupDisplay] = useState(false);
 
