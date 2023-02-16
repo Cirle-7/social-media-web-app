@@ -1,5 +1,5 @@
 import Password from "@components/home/password";
-import useHttp from "src/hooks/use-Auth";
+import useHttp from "@hooks/use-Auth";
 
 function ForgotPassword() {
   const getResponse = (res) => {

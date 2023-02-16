@@ -1,7 +1,7 @@
 import Button from '@components/ui/button';
 import Input from '@components/ui/input';
 import { useEffect, useState } from 'react';
-import useValidation from 'src/hooks/use-Validation';
+import useValidation from '@hooks/use-Validation'
 
 function SignUp(props) {
   const { loginPageHandler, signup } = props.onClick;

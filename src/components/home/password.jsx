@@ -1,8 +1,8 @@
-import Button from '@components/ui/button';
-import Input from '@components/ui/input';
+import Button from '@ui/button';
+import Input from '@ui/input';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import useValidation from 'src/hooks/use-Validation';
+import useValidation from '@hooks/use-Validation';
 
 function Password({ passwordReset }) {
   const [formIsValid, setFormIsValid] = useState(null);

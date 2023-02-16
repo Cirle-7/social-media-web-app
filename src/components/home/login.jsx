@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import useValidation from 'src/hooks/use-Validation';
-import Button from '../ui/button';
-import Input from '../ui/input';
+import useValidation from '@hooks/use-Validation';
+import Button from '@ui/button';
+import Input from '@ui/input';
 
 function Login(props) {
   const { signupPageHandler, login } = props.onClick;
