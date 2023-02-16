@@ -1,7 +1,7 @@
 import Button from '@components/ui/button';
 import Input from '@components/ui/input';
 import { useEffect, useState } from 'react';
-import useValidation from 'src/hooks/use-Validation';
+import useValidation from '@hooks/use-Validation'
 
 function SignUp(props) {
   const { loginPageHandler, signup } = props.onClick;
@@ -76,7 +76,7 @@ function SignUp(props) {
 
   return (
     <>
-      <div className="mt-24">
+      <div className="pt-24 sm:mt-24 sm:pt-0">
         <h1 className="w-min text-5xl font-bold mx-auto">LOGO</h1>
       </div>
       <div className="w-8/12 mx-auto mt-6">

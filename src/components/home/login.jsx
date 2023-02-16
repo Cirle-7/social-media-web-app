@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import useValidation from 'src/hooks/use-Validation';
-import Button from '../ui/button';
-import Input from '../ui/input';
+import useValidation from '@hooks/use-Validation';
+import Button from '@ui/button';
+import Input from '@ui/input';
 
 function Login(props) {
   const { signupPageHandler, login } = props.onClick;
@@ -47,7 +47,7 @@ function Login(props) {
 
   return (
     <>
-      <div className="mt-48">
+      <div className="pt-48 sm:mt-48 sm:pt-0">
         <h1 className="w-min text-5xl font-bold mx-auto">LOGO</h1>
       </div>
       <div className="w-8/12 mx-auto mt-6">
