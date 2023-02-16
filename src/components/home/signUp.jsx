@@ -76,7 +76,7 @@ function SignUp(props) {
 
   return (
     <>
-      <div className="mt-24">
+      <div className="pt-24 sm:mt-24 sm:pt-0">
         <h1 className="w-min text-5xl font-bold mx-auto">LOGO</h1>
       </div>
       <div className="w-8/12 mx-auto mt-6">
