@@ -101,7 +101,8 @@ const mockPosts = [
 ];
 
 const Feed = () => {
-  const { user: userStore } = useUser();
+  const { user: userStore, token } = useUser();
+
   const [user, setUser] = useState({});
 
   {
@@ -111,6 +112,8 @@ const Feed = () => {
   useEffect(() => {
     setUser(userStore);
   }, [userStore]);
+
+  // console.log('saved token', token);
 
   return (
     <div className="bg-primary text-black flex">

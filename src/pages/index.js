@@ -6,8 +6,9 @@ function Homepage() {
   const setUserStore = useUserStore((state) => state.setUserStore);
 
   const getResp = (res) => {
-    const { data } = res.data;
-    setUserStore(data.user);
+    const { data } = res;
+    console.log('returned token', data.token);
+    setUserStore(data.token, data.user);
   };
 
   // LOGIN AND SIGNUP HANDLERS (CUSTOM HOOK)
