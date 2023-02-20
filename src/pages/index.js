@@ -1,5 +1,6 @@
 import Home from '@components/home/Home';
 import useHttp from '@hooks/use-Auth';
+import LoadingAnimation from '@ui/loading';
 import { useUserStore } from '@utils/store';
 
 function Homepage() {
@@ -12,9 +13,16 @@ function Homepage() {
   };
 
   // LOGIN AND SIGNUP HANDLERS (CUSTOM HOOK)
-  const login = useHttp('/api/users/login', getResp, true);
-  const signup = useHttp('/api/users/signup', getResp, false);
-  return <Home auth={{ login, signup }} />;
+  const login = useHttp('login', 'POST', getResp, true);
+  const signup = useHttp('signup', 'POST', getResp, false);
+
+  const { isLoading } = login;
+  return (
+    <>
+      <Home auth={{ login, signup }} />
+      <LoadingAnimation loadingSpinner={isLoading} />
+    </>
+  );
 }
 
 export default Homepage;

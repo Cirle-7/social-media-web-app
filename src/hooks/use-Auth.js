@@ -1,8 +1,11 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
-const useHttp = (url, getResponse, push = false) => {
+const useHttp = (url, method, getResponse, push = false) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(null)
   const postRequest = async (data) => {
+    setIsLoading(true);
     console.log({ data });
     try {
       // const response = await axios.post(
@@ -20,8 +23,8 @@ const useHttp = (url, getResponse, push = false) => {
       // console.log({ response });
       // getResponse(response);
 
-      await fetch('https://www.circle7.codes/api/v1/users/login', {
-        method: 'POST',
+      await fetch(`https://www.circle7.codes/api/v1/users/${url}`, {
+        method: method,
         credentials: 'include',
         withCredentials: true,
         headers: {
@@ -46,8 +49,9 @@ const useHttp = (url, getResponse, push = false) => {
         console.log({ error });
       }
     }
+    setIsLoading(false)
   };
-  return { postRequest };
+  return { postRequest, isLoading };
 };
 
 export default useHttp;
