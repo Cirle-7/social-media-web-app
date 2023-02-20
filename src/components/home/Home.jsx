@@ -1,3 +1,4 @@
+import LoadingAnimation from '@components/ui/loading';
 import { useState } from 'react';
 import Login from './login';
 import SignUp from './signUp';
@@ -39,6 +40,7 @@ function Home({ auth }) {
 
   return (
     <>
+    <LoadingAnimation />
       <section className="sm:min-w-full sm:min-h-screen sm:grid sm:grid-cols-5">
         <div className="sm:min-w-full sm:h-screen bg-slate-50 sm:col-span-3">
           {signupDislay && <SignUp onClick={{ loginPageHandler, signup }} />}

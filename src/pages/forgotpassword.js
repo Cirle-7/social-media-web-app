@@ -7,7 +7,7 @@ function ForgotPassword() {
   }
 
   // FROM CUSTOM HOOK
-  const passwordReset = useHttp('/api/users/forgotpassword', getResponse, false)
+  const passwordReset = useHttp('forgotpassword','PATCH', getResponse, false)
   return <Password passwordReset={passwordReset} />;
 }
 

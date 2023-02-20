@@ -6,6 +6,8 @@ export default function Document() {
       <Head />
       <body>
         <Main />
+        {/* <div id='backdrop'></div> */}
+        <div id='spinner' className='flex justify-center items-center'></div>
         <NextScript />
       </body>
     </Html>
