@@ -101,7 +101,7 @@ const mockPosts = [
 ];
 
 const Feed = () => {
-  const { user: userStore, token } = useUser();
+  const { user: userStore, token, resetUserStore } = useUser();
 
   const [user, setUser] = useState({});
 
@@ -127,7 +127,7 @@ const Feed = () => {
           <div className="mt-[1rem] grid place-items-center gap-1">
             <PersonIcon />
             <h2>{user.username !== null ? user.username : 'Username'}</h2>
-            <Button className="btn bg-black text-white">
+            <Button className="btn bg-black text-white" onClick={() => resetUserStore()}>
               {' '}
               <ExitIcon /> <span className="ml-2">Log Out</span>{' '}
             </Button>

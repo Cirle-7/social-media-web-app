@@ -28,7 +28,7 @@ export const useUserStore = create(
             username: data.username,
           },
         })),
-      resetUserStore: () => set(initialState),
+      resetUserStore: () => set(() => ({ token: '', user: initialState.user })),
     }),
     {
       name: 'user-details',
