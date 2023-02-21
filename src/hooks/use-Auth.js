@@ -26,7 +26,6 @@ const useHttp = (url, method, getResponse, push = false) => {
       await fetch(`https://www.circle7.codes/api/v1/users/${url}`, {
         method: method,
         credentials: 'include',
-        withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
           'Allow-Control-Allow-Credentials': 'true',
