@@ -10,10 +10,3 @@ const axiosClient = axios.create({
 });
 
 export default axiosClient;
-
-/**
-  credentials: 'include',
-  headers : {
-   'Allow-Control-Allow-Credentials' : 'true'
-  }
- */

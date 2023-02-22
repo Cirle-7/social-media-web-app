@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-const useHttp = (url, method, getResponse, push = false) => {
-  const router = useRouter();
+const useHttp = (url, method, getResponse) => {
   const [isLoading, setIsLoading] = useState(null);
+  const [error, setError] = useState('');
+  const [isError, setIsError] = useState(false);
+
   const postRequest = async (data) => {
     setIsLoading(true);
-    console.log({ data });
     try {
       await fetch(`https://www.circle7.codes/api/v1/users/${url}`, {
         method: method,
@@ -19,23 +19,29 @@ const useHttp = (url, method, getResponse, push = false) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('data', data);
-          getResponse(data);
-        });
+          if (data.status === 'Success') {
+            const response = data;
+            getResponse(response);
+          }
 
-      if (push === true) router.push('/feed');
+          if (data.status === 'Fail') {
+            setIsError(true);
+            setError(data);
+          }
+        });
     } catch (error) {
       if (error.reponse) {
-        console.log({ error: error.response });
+        console.log('err.res', { error: error.response });
       } else if (error.request) {
-        console.log({ error: error.request });
+        console.log('err.req', { error: error.request });
       } else if (error.message) {
-        console.log({ error });
+        console.log('err.msg', { error });
       }
     }
+
     setIsLoading(false);
   };
-  return { postRequest, isLoading };
+  return { postRequest, isLoading, isError, error };
 };
 
 export default useHttp;
