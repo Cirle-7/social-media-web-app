@@ -20,10 +20,11 @@ const useHttp = (url, method, getResponse, push = false) => {
         .then((response) => response.json())
         .then((data) => {
           console.log('data', data);
+          document.cookie = `token=${data.data.token}`;
           getResponse(data);
         });
 
-      if (push === true) router.push('/feed');
+      if (push === true) router.replace('/feed');
     } catch (error) {
       if (error.reponse) {
         console.log({ error: error.response });

@@ -104,18 +104,18 @@ const mockPosts = [
 const Feed = () => {
   const router = useRouter();
   const { user: userStore, token, resetUserStore } = useUser();
-
   const [user, setUser] = useState({});
-
+  
   {
     /** because zustand is using localStorage to persist &
-   SSR pages cant't access local-storage, useEffect is used to only load the details from localSrorage on the client-sde*/
-  }
+     SSR pages cant't access local-storage, useEffect is used to only load the details from localSrorage on the client-sde*/
+    }
   useEffect(() => {
     setUser(userStore);
-  }, [userStore]);
+  }, [userStore, token]);
 
   const logout = () => {
+    document.cookie = `token=;expires=${Date.now()}`
     router.replace('/');
     resetUserStore();
   };
