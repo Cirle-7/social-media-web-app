@@ -2,6 +2,7 @@ import Button from '@components/ui/button';
 import Input from '@components/ui/input';
 import { useUser } from '@hooks/use-User';
 import { ExitIcon, PersonIcon } from '@radix-ui/react-icons';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Events from './events';
 import PostBox from './postBox';
@@ -101,7 +102,8 @@ const mockPosts = [
 ];
 
 const Feed = () => {
-  const { user: userStore, token } = useUser();
+  const router = useRouter();
+  const { user: userStore, token, resetUserStore } = useUser();
 
   const [user, setUser] = useState({});
 
@@ -112,6 +114,11 @@ const Feed = () => {
   useEffect(() => {
     setUser(userStore);
   }, [userStore]);
+
+  const logout = () => {
+    router.replace('/');
+    resetUserStore();
+  };
 
   // console.log('saved token', token);
 
@@ -127,7 +134,7 @@ const Feed = () => {
           <div className="mt-[1rem] grid place-items-center gap-1">
             <PersonIcon />
             <h2>{user.username !== null ? user.username : 'Username'}</h2>
-            <Button className="btn bg-black text-white">
+            <Button className="btn bg-black text-white" onClick={logout}>
               {' '}
               <ExitIcon /> <span className="ml-2">Log Out</span>{' '}
             </Button>

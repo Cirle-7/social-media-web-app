@@ -14,13 +14,12 @@ function Homepage() {
 
   // LOGIN AND SIGNUP HANDLERS (CUSTOM HOOK)
   const login = useHttp('login', 'POST', getResp, true);
-  const signup = useHttp('signup', 'POST', getResp, false);
+  const signup = useHttp('signup', 'POST', getResp, true);
 
-  const { isLoading } = login;
   return (
     <>
       <Home auth={{ login, signup }} />
-      <LoadingAnimation loadingSpinner={isLoading} />
+      <LoadingAnimation loadingSpinner={login.isLoading || signup.isLoading } />
     </>
   );
 }
