@@ -21,6 +21,7 @@ const useHttp = (url, method, getResponse) => {
         .then((data) => {
           if (data.status === 'Success') {
             const response = data;
+            document.cookie = `token=${data.data.token}`;
             getResponse(response);
           }
 
