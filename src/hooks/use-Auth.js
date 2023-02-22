@@ -3,26 +3,11 @@ import { useState } from 'react';
 
 const useHttp = (url, method, getResponse, push = false) => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(null)
+  const [isLoading, setIsLoading] = useState(null);
   const postRequest = async (data) => {
     setIsLoading(true);
     console.log({ data });
     try {
-      // const response = await axios.post(
-      //   'https://www.circle7.codes/api/v1/users/login',
-      //   data,
-      //   {
-      //     withCredentials: true,
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       'Allow-Control-Allow-Credentials': 'true',
-      //     },
-      //   }
-      // );
-      // getResponse(response);
-      // console.log({ response });
-      // getResponse(response);
-
       await fetch(`https://www.circle7.codes/api/v1/users/${url}`, {
         method: method,
         credentials: 'include',
@@ -49,7 +34,7 @@ const useHttp = (url, method, getResponse, push = false) => {
         console.log({ error });
       }
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
   return { postRequest, isLoading };
 };

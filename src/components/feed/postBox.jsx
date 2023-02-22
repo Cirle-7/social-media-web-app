@@ -31,13 +31,6 @@ const PostBox = () => {
           console.log('data', data);
           // getResponse(data);
         });
-      // getRe
-      // return axios
-      //   .post(`/api/users/createpost/${token}`, newPost, {
-      //     withCredentials: true,
-      //   })
-      //   .then(console.log)
-      //   .catch(console.log);
     },
   });
 
