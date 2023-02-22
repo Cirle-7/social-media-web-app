@@ -1,15 +1,8 @@
-import Button from '@components/ui/button';
-import Input from '@components/ui/input';
 import { useUser } from '@hooks/use-User';
-import { ExitIcon, PersonIcon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Events from './events';
 import PostBox from './postBox';
 import Posts from './posts';
-import SidebarNav from './sidebarNavigation';
-import SidebarOptions from './sidebarOptions';
-import Trending from './trending';
 const mockPosts = [
   {
     id: 1,
@@ -120,84 +113,20 @@ const Feed = () => {
     resetUserStore();
   };
 
-  // console.log('saved token', token);
-
   return (
-    <div className="bg-primary text-black flex">
-      {/** Left Sidebar / User Options */}
-      <section className="hidden w-20 md:grid h-[100vh] overflow-y-scroll scrollbar-hide">
-        <div className="grid place-items-center py-[1rem]  ">
-          <h2>LOGO</h2>
+    <section className="w-[100vw] md:w-[55vw] h-[100vh] md:overflow-y-scroll md:scrollbar-hide">
+      <div className="grid place-items-center ">
+        {/** Mobile Header */}
 
-          <SidebarNav />
-          <SidebarOptions />
-          <div className="mt-[1rem] grid place-items-center gap-1">
-            <PersonIcon />
-            <h2>{user.username !== null ? user.username : 'Username'}</h2>
-            <Button className="btn bg-black text-white" onClick={logout}>
-              {' '}
-              <ExitIcon /> <span className="ml-2">Log Out</span>{' '}
-            </Button>
-          </div>
-        </div>
-      </section>
+        {/*Post Box*/}
+        <PostBox />
 
-      {/**Feed Section */}
-      <section className="w-[100vw] md:w-[55vw] h-[100vh] overflow-y-scroll scrollbar-hide">
-        <div className="grid place-items-center ">
-          {/** Mobile Header */}
-          <section className="bg-accent flex items-center w-screen md:hidden px-2 py-3  fixed top-0">
-            <div className="ml-[.5rem] w-[30px] h-[30px] rounded-full border-2 border-black grid place-items-center">
-              <PersonIcon width="25" height="25" />
-            </div>
-            <h2 className="font-bold ml-[30vw]">LOGO</h2>
-          </section>
-
-          {/*Post Box*/}
-          <PostBox />
-
-          {/** Posts Section */}
-          <section className="grid gap-3 my-[4rem] md:my-3">
-            <Posts posts={mockPosts} />
-          </section>
-        </div>
-      </section>
-
-      {/** Right Side Bar : Trending, Events & Co. */}
-      <section
-        className="md:grid bg-primary hidden border border-solid 
-        w-[25vw] h-[100vh] overflow-y-scroll  scrollbar-hide"
-      >
-        {/** Search Bar */}
-        <div className="mt-2 grid place-items-center">
-          <label htmlFor="search">
-            <Input
-              placeholder="Search SMWA"
-              name="search"
-              className="search pl-7 pr-3 py-[.5rem] rounded-full bg-accent  placeholder-text-accent
-            focus:outline-dotted focus:border-sky-600 font-semibold placeholder-opacity-75 "
-              type="text"
-            />
-          </label>
-        </div>
-
-        {/** Trending */}
-        <Trending />
-
-        {/**Events */}
-        <Events />
-
-        {/** Miscellaneous */}
-        <section className="grid grid-cols-2 gap-y-3 px-3 mt-10">
-          <span className="text-text-accent text-sm">Terms of Services</span>
-          <span className="text-text-accent text-sm">Privacy Policy</span>
-          <span className="text-text-accent text-sm">Cookies Policy</span>
-          <span className="text-text-accent text-sm">Accessibility</span>
-          <span className="text-text-accent text-sm">Ads Info</span>
-          <span className="text-text-accent text-sm">More</span>
+        {/** Posts Section */}
+        <section className="grid gap-3 my-[4rem] md:my-3">
+          <Posts posts={mockPosts} />
         </section>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

@@ -12,7 +12,9 @@ const Posts = ({ posts }) => {
       {posts.map((post) => (
         <div
           key={post.id}
-          className="border border-t-0 border-l-0 border-r-0 border-black w-[98vw] md:w-[50vw]"
+          className="border z-[2] md:z-0 border-t-0 border-l-0 
+          border-r-0 border-black 
+          w-[100vw] md:w-[50vw] mt-[.5rem]"
         >
           <div className="flex py-1">
             <div className="ml-[.5rem] w-[40px] h-[40px] rounded-full border-2 border-black grid place-items-center">

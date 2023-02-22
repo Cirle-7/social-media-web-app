@@ -1,7 +1,7 @@
 import Button from '@components/ui/button';
 import Input from '@components/ui/input';
+import useValidation from '@hooks/use-Validation';
 import { useEffect, useState } from 'react';
-import useValidation from '@hooks/use-Validation'
 
 function SignUp(props) {
   const { loginPageHandler, signup } = props.onClick;
@@ -72,6 +72,13 @@ function SignUp(props) {
     dispatchEmail({ type: 'EMAIL_INPUT', val: '' });
     dispatchPassword({ type: 'PASSWORD_INPUT', val: '' });
     dispatchDisplayName({ type: 'DISPLAYNAME_INPUT', val: '' });
+
+    console.log({
+      name: userNameState.value,
+      pwd: passwordState.value,
+      mail: emailState.value,
+      disp: displayNameState.value,
+    });
   };
 
   return (
@@ -120,21 +127,26 @@ function SignUp(props) {
             <span className="font-bold underline">cookie use</span>
           </small>
           <Button
-            type="default"
-            disabled={!formIsValid}
+            type="submit"
+            // disabled={!formIsValid}
             className={
-              formIsValid
-                ? 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900'
-                : 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-400 cursor-not-allowed'
+              ''
+              // formIsValid
+              //   ? 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900'
+              //   : 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-400 cursor-not-allowed'
             }
           >
             Sign Up
           </Button>
         </form>
         <div className="min-w-fit flex flex-row justify-center gap-8 mt-4 items-center">
-          <span className='text-slate-400'>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span>
+          <span className="text-slate-400">
+            &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+          </span>
           <p className="w-2 text-lg">or</p>
-          <span className='text-slate-400'>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span>
+          <span className="text-slate-400">
+            &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+          </span>
         </div>
         <div className="w-56 mx-auto mt-4 flex flex-col gap-3">
           <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
