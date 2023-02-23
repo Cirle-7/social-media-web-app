@@ -4,8 +4,7 @@ import useValidation from '@hooks/use-Validation';
 import Button from '@ui/button';
 import Input from '@ui/input';
 
-function Login(props) {
-  const { signupPageHandler, login } = props.onClick;
+function Login({login}) {
   const [formIsValid, setFormIsValid] = useState(false);
 
   // FORM VALIDATION WITH CUSTOM HOOKS
@@ -69,12 +68,11 @@ function Login(props) {
             onChange={passwordInputHandler}
           />
           <div className="w-full flex flex-row justify-between">
-            <p
+            <Link href='/signup'
               className="hover:cursor-pointer"
-              onClick={() => signupPageHandler()}
             >
               Back to Sign Up
-            </p>
+            </Link>
             <Link className='hover:cursor-pointer' href='/forgotpassword'>forgot password</Link>
           </div>
           <Button

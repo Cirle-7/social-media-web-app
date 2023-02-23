@@ -1,10 +1,10 @@
 import Button from '@components/ui/button';
 import Input from '@components/ui/input';
 import useValidation from '@hooks/use-Validation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-function SignUp(props) {
-  const { loginPageHandler, signup } = props.onClick;
+function SignUp({signup}) {
   const [formIsValid, setFormIsValid] = useState(false);
 
   // FORM VALIDATION USING CUSTOM HOOK
@@ -128,12 +128,11 @@ function SignUp(props) {
           </small>
           <Button
             type="submit"
-            // disabled={!formIsValid}
+            disabled={!formIsValid}
             className={
-              ''
-              // formIsValid
-              //   ? 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900'
-              //   : 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-400 cursor-not-allowed'
+              formIsValid
+                ? 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900'
+                : 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-400 cursor-not-allowed'
             }
           >
             Sign Up
@@ -160,9 +159,9 @@ function SignUp(props) {
           </Button>
           <small className="block mt-0 mx-auto">
             Already have an account?
-            <Button onClick={() => loginPageHandler()} className="font-bold">
+            <Link href='/login' className="font-bold">
               Sign in
-            </Button>
+            </Link>
           </small>
         </div>
       </div>
