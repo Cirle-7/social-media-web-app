@@ -1,21 +1,7 @@
-import LoadingAnimation from '@components/ui/loading';
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-function AuthLayout({ children, auth }) {
+function AuthLayout({ children }) {
   const router = useRouter()
-  // const { login, signup } = auth;
-  // const [loginDislay, setLoginDisplay] = useState(true);
-  // const [signupDislay, setSignupDisplay] = useState(false);
-
-  // const loginPageHandler = () => {
-  //   setLoginDisplay(true);
-  //   setSignupDisplay(false);
-  // };
-  // const signupPageHandler = () => {
-  //   setLoginDisplay(false);
-  //   setSignupDisplay(true);
-  // };
 
   let content;
 
@@ -40,7 +26,6 @@ function AuthLayout({ children, auth }) {
 
   return (
     <>
-      <LoadingAnimation />
       <section className="sm:min-w-full sm:min-h-screen sm:grid sm:grid-cols-5">
         <div className="sm:min-w-full sm:h-screen bg-slate-50 sm:col-span-3">
           {children}

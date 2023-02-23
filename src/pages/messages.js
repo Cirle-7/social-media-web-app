@@ -1,5 +1,7 @@
+import Message from "@components/messages";
+
 function Messages() {
-  return <h1 className="w-3/5 mt-20">Messages</h1>
+  return <Message />
 }
 
 export default Messages;
