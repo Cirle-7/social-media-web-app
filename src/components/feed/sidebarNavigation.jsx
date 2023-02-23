@@ -11,7 +11,7 @@ const SidebarNav = () => {
   return (
     <nav className="bg-accent md:w-fit lg:w-[15vw] p-3 mt-[2rem] ">
       <ul className="sidebar_nav">
-        <Link href="/">
+        <Link href="/feed">
           <li className="flex items-center gap-[1rem] md:gap-[.5rem] cursor-pointer font-semibold">
             <HomeIcon /> <span>Home</span>
           </li>

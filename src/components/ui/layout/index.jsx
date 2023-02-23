@@ -31,8 +31,9 @@ const Post_FeedLayout = ({ children }) => {
   }, [userStore]);
 
   const logout = () => {
-    replace('/');
+    document.cookie = `token=;expires=${Date.now()}`;
     resetUserStore();
+    replace('/');
   };
   const onProfilePage = pathname.includes('profile');
 

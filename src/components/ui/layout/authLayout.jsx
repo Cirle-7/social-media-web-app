@@ -1,25 +1,11 @@
-import LoadingAnimation from '@components/ui/loading';
-import { useState } from 'react';
-import Login from './login';
-import SignUp from './signUp';
+import { useRouter } from 'next/router';
 
-function Home({ auth }) {
-  const { login, signup } = auth;
-  const [loginDislay, setLoginDisplay] = useState(true);
-  const [signupDislay, setSignupDisplay] = useState(false);
-
-  const loginPageHandler = () => {
-    setLoginDisplay(true);
-    setSignupDisplay(false);
-  };
-  const signupPageHandler = () => {
-    setLoginDisplay(false);
-    setSignupDisplay(true);
-  };
+function AuthLayout({ children }) {
+  const router = useRouter()
 
   let content;
 
-  if (signupDislay)
+  if (router.pathname === '/signup')
     content = (
       <div className="ml-2 relative top-72">
         <h2 className="uppercase text-5xl font-bold text-slate-100">Get</h2>
@@ -27,7 +13,7 @@ function Home({ auth }) {
         <h2 className="uppercase text-5xl font-bold text-slate-100">Started</h2>
       </div>
     );
-  else if (loginDislay)
+  else if (router.pathname === '/login')
     content = (
       <div className="ml-2 relative top-64">
         <h2 className="text-5xl font-bold text-slate-100">Hello</h2>
@@ -40,11 +26,9 @@ function Home({ auth }) {
 
   return (
     <>
-    <LoadingAnimation />
       <section className="sm:min-w-full sm:min-h-screen sm:grid sm:grid-cols-5">
         <div className="sm:min-w-full sm:h-screen bg-slate-50 sm:col-span-3">
-          {signupDislay && <SignUp onClick={{ loginPageHandler, signup }} />}
-          {loginDislay && <Login onClick={{ signupPageHandler, login }} />}
+          {children}
         </div>
         <div className="hidden sm:block sm:min-w-full sm:h-screen sm:bg-slate-800 sm:col-span-2">
           {content}
@@ -53,4 +37,4 @@ function Home({ auth }) {
     </>
   );
 }
-export default Home;
+export default AuthLayout;
