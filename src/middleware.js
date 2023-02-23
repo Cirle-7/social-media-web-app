@@ -4,7 +4,7 @@ export default async function middleware(req) {
   const token = await req.cookies.get('token')?.value;
 
   if (!token) {
-    const loginUrl = new URL('/', req.url);
+    const loginUrl = new URL('/login', req.url);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -12,5 +12,5 @@ export default async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/feed']
+  matcher: ['/feed', '/profile', '/messages']
 };

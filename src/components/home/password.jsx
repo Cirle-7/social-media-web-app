@@ -56,7 +56,7 @@ function Password({ passwordReset }) {
           >
             Reset password
           </Button>
-          <Link href="/" className="mt-3 text-sm hover:cursor-pointer">
+          <Link href="/login" className="mt-3 text-sm hover:cursor-pointer">
             Back to sign in
           </Link>
         </form>

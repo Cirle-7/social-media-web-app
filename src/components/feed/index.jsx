@@ -1,6 +1,3 @@
-import { useUser } from '@hooks/use-User';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import PostBox from './postBox';
 import Posts from './posts';
 const mockPosts = [
@@ -95,24 +92,6 @@ const mockPosts = [
 ];
 
 const Feed = () => {
-  const router = useRouter();
-  const { user: userStore, token, resetUserStore } = useUser();
-  const [user, setUser] = useState({});
-  
-  {
-    /** because zustand is using localStorage to persist &
-     SSR pages cant't access local-storage, useEffect is used to only load the details from localSrorage on the client-sde*/
-    }
-  useEffect(() => {
-    setUser(userStore);
-  }, [userStore, token]);
-
-  const logout = () => {
-    document.cookie = `token=;expires=${Date.now()}`
-    router.replace('/');
-    resetUserStore();
-  };
-
   return (
     <section className="w-[100vw] md:w-[55vw] h-[100vh] md:overflow-y-scroll md:scrollbar-hide">
       <div className="grid place-items-center ">

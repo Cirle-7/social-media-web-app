@@ -1,10 +1,10 @@
-import Home from '@components/home/Home';
+import SignUp from '@components/home/signUp';
+import LoadingAnimation from '@components/ui/loading';
 import useHttp from '@hooks/use-Auth';
-import LoadingAnimation from '@ui/loading';
 import { useUserStore } from '@utils/store';
 import { useRouter } from 'next/router';
 
-function Homepage() {
+function SignupPage() {
   const setUserStore = useUserStore((state) => state.setUserStore);
   const router = useRouter();
 
@@ -14,16 +14,14 @@ function Homepage() {
     router.push('/feed');
   };
 
-  // LOGIN AND SIGNUP HANDLERS (CUSTOM HOOK)
-  const login = useHttp('login', 'POST', getResp);
   const signup = useHttp('signup', 'POST', getResp);
 
   return (
     <>
-      <Home auth={{ login, signup }} />
-      <LoadingAnimation loadingSpinner={login.isLoading || signup.isLoading} />
+      <LoadingAnimation loadingSpinner={signup.isLoading} />
+      <SignUp signup={signup} />;
     </>
   );
 }
 
-export default Homepage;
+export default SignupPage;
