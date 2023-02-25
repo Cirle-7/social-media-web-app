@@ -52,7 +52,7 @@ function Login({login}) {
       <div className="w-8/12 mx-auto mt-6">
         <form onSubmit={submitFormHandler} className="flex flex-col gap-3">
           <Input
-            id='email'
+            id="email"
             type="email"
             value={emailState.value}
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -60,7 +60,7 @@ function Login({login}) {
             onChange={emailInputHandler}
           />
           <Input
-            id='password'
+            id="password"
             value={passwordState.value}
             type="password"
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -68,12 +68,12 @@ function Login({login}) {
             onChange={passwordInputHandler}
           />
           <div className="w-full flex flex-row justify-between">
-            <Link href='/signup'
-              className="hover:cursor-pointer"
-            >
+            <Link href="/signup" className="hover:cursor-pointer">
               Back to Sign Up
             </Link>
-            <Link className='hover:cursor-pointer' href='/forgotpassword'>forgot password</Link>
+            <Link className="hover:cursor-pointer" href="/forgotpassword">
+              forgot password
+            </Link>
           </div>
           <Button
             type="default"
@@ -84,9 +84,32 @@ function Login({login}) {
             }
             disabled={!formIsValid}
           >
-            Login
+            Sign in
           </Button>
         </form>
+        <div className="min-w-fit flex flex-row justify-center gap-8 mt-4 items-center">
+          <span className="text-slate-400">
+            &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+          </span>
+          <p className="w-2 text-lg">or</p>
+          <span className="text-slate-400">
+            &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+          </span>
+        </div>
+        <div className="w-56 mx-auto mt-4 flex flex-col gap-3">
+          <Link
+            href="https://circle7.codes/api/v1/users/auth/google"
+            className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
+          >
+            Sign in with Google
+          </Link>
+          <Link
+            href="https://circle7.codes/api/v1/users/auth/github"
+            className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
+          >
+            Sign in with GitHub
+          </Link>
+        </div>
       </div>
     </>
   );

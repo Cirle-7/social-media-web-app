@@ -72,13 +72,6 @@ function SignUp({ signup }) {
     dispatchEmail({ type: 'EMAIL_INPUT', val: '' });
     dispatchPassword({ type: 'PASSWORD_INPUT', val: '' });
     dispatchDisplayName({ type: 'DISPLAYNAME_INPUT', val: '' });
-
-    console.log({
-      name: userNameState.value,
-      pwd: passwordState.value,
-      mail: emailState.value,
-      disp: displayNameState.value,
-    });
   };
 
   return (
@@ -148,15 +141,21 @@ function SignUp({ signup }) {
           </span>
         </div>
         <div className="w-56 mx-auto mt-4 flex flex-col gap-3">
-          <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
+          <Link
+            href="https://circle7.codes/api/v1/users/auth/google"
+            className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
+          >
             Sign up with Google
-          </Button>
-          <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
-            Sign up with Apple
-          </Button>
-          <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
+          </Link>
+          <Link
+            href="https://circle7.codes/api/v1/users/auth/github"
+            className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
+          >
+            Sign up with GitHub
+          </Link>
+          {/* <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
             Sign up with Phone Number
-          </Button>
+          </Button> */}
           <small className="block mt-0 mx-auto">
             Already have an account?
             <Link href="/login" className="font-bold">
