@@ -128,12 +128,12 @@ function SignUp({ signup }) {
           </small>
           <Button
             type="submit"
-            // disabled={!formIsValid}
-            // className={
-            //   formIsValid
-            //     ? 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900'
-            //     : 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-400 cursor-not-allowed'
-            // }
+            disabled={!formIsValid}
+            className={
+              formIsValid
+                ? 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900'
+                : 'w-full h-10 border-none rounded-lg text-white text-sm bg-slate-400 cursor-not-allowed'
+            }
           >
             Sign Up
           </Button>
