@@ -28,6 +28,7 @@ const useHttp = (url, method, getResponse) => {
           if (data.status === 'Fail') {
             setIsError(true);
             setError(data);
+            console.log({ data });
           }
         });
     } catch (error) {

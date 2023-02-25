@@ -7,40 +7,30 @@ import {
   PersonIcon,
   VideoIcon,
 } from '@radix-ui/react-icons';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { makePost } from '@utils/api';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const PostBox = () => {
-  const mutation = useMutation({
-    mutationFn: (newPost) => {
-      return fetch('https://www.circle7.codes/api/v1/post', {
-        method: 'POST',
-        credentials: 'include',
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
-          'Allow-Control-Allow-Credentials': 'true',
-        },
-        body: JSON.stringify(newPost),
-      })
-        .then((response) => {
-          response.json();
-          console.log('re.json', response);
-        })
-        .then((data) => {
-          console.log('newPost', newPost);
-          console.log('data', data);
-          // getResponse(data);
-        });
+  const [text, setText] = useState('');
+  const queryClient = useQueryClient();
+
+  const postMutation = useMutation({
+    mutationFn: makePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userPosts'] });
+      toast.success('Post sent successfully');
+      setText('');
     },
   });
 
   const createPost = (event) => {
     event.preventDefault();
     const form = new FormData(event.target);
-    const body = form.get('post');
-    // console.log('body', body);
+    const body = text;
 
-    mutation.mutate({
+    postMutation.mutate({
       body,
     });
   };
@@ -58,6 +48,8 @@ const PostBox = () => {
             type="text"
             name="post"
             placeholder="Say something"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             className="py-[.4rem] px-[.4rem] w-[60vw] md:w-[40vw] rounded-sm"
           />
 
@@ -81,13 +73,18 @@ const PostBox = () => {
             </li>
           </ul>
 
-          <div className="flex mt-3 justify-end">
+          <div className="flex mt-3 justify-end gap-2">
+            <Button
+              type="button"
+              className="border border-black rounded-md font-medium py-[.2rem] px-[.5rem]"
+            >
+              Save in draft
+            </Button>
             <Button
               type="submit"
-              className="bg-black text-white py-[0rem] px-[.5rem]"
+              className="bg-black rounded-md font-medium text-white py-[.2rem] px-[1rem]"
             >
-              {' '}
-              Post{' '}
+              Make Post
             </Button>
           </div>
         </form>

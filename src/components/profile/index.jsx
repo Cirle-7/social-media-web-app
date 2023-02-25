@@ -8,6 +8,8 @@ import {
   SewingPinIcon,
   TextAlignJustifyIcon,
 } from '@radix-ui/react-icons';
+import { useQuery } from '@tanstack/react-query';
+import { getUserPosts } from '@utils/api';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -19,17 +21,14 @@ const Profile = () => {
     setUser(userStore);
   }, [userStore]);
 
-  const mockPosts = Array(10).fill({
-    id: 8,
-    name: user.username ?? 'name',
-    username: user.displayName ?? 'username',
-    date: '1 Jan',
-    text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore sed sapiente laborum aut. Possimus, officia rerum adipisci voluptatibus voluptates quisquam.',
-    likeCount: 200,
-    replyCount: 50,
-    shareCount: 60,
-    repostCount: 15,
+  const { data, error, isError, isLoading } = useQuery({
+    queryKey: ['userPosts'],
+    queryFn: getUserPosts,
   });
+
+  const allPosts = data.allPosts;
+
+  console.log('userdata', allPosts);
 
   return (
     <div className="w-[100vw] md:w-[55vw] h-[100vh] overflow-y-scroll scrollbar-hide">
@@ -116,7 +115,7 @@ const Profile = () => {
       </section>
 
       <section className="mt-[2rem]">
-        <Posts posts={mockPosts} />
+        <Posts posts={allPosts} />
       </section>
     </div>
   );
