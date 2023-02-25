@@ -4,7 +4,7 @@ import useValidation from '@hooks/use-Validation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-function SignUp({signup}) {
+function SignUp({ signup }) {
   const [formIsValid, setFormIsValid] = useState(false);
 
   // FORM VALIDATION USING CUSTOM HOOK
@@ -159,7 +159,7 @@ function SignUp({signup}) {
           </Button>
           <small className="block mt-0 mx-auto">
             Already have an account?
-            <Link href='/login' className="font-bold">
+            <Link href="/login" className="font-bold">
               Sign in
             </Link>
           </small>

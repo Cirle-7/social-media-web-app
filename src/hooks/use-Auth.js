@@ -38,6 +38,7 @@ const useHttp = (url, method, getResponse, type) => {
 
           if (data.status === 'Fail') {
             setIsError(true);
+
             type === 'login'? setError('Email or password is incorrect') : type === 'signup'? setError('This user already exists') : type === 'passwordReset'? setError('something went wrong') : '';
           }
         });
