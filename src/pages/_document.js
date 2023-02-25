@@ -6,7 +6,7 @@ export default function Document() {
       <Head />
       <body>
         <Main />
-        {/* <div id='backdrop'></div> */}
+        <div id='statusMessage' className='flex justify-center items-center'></div>
         <div id='spinner' className='flex justify-center items-center'></div>
         <NextScript />
       </body>
