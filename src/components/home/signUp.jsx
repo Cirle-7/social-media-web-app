@@ -145,13 +145,13 @@ function SignUp({ signup }) {
             href="https://circle7.codes/api/v1/users/auth/google"
             className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
           >
-            Sign up with Google
+            Sign in with Google
           </Link>
           <Link
             href="https://circle7.codes/api/v1/users/auth/github"
             className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
           >
-            Sign up with GitHub
+            Sign in with GitHub
           </Link>
           {/* <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
             Sign up with Phone Number

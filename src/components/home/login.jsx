@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import useValidation from '@hooks/use-Validation';
 import Button from '@ui/button';
 import Input from '@ui/input';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-function Login({login}) {
+function Login({ login }) {
   const [formIsValid, setFormIsValid] = useState(false);
 
   // FORM VALIDATION WITH CUSTOM HOOKS
@@ -87,29 +87,6 @@ function Login({login}) {
             Sign in
           </Button>
         </form>
-        <div className="min-w-fit flex flex-row justify-center gap-8 mt-4 items-center">
-          <span className="text-slate-400">
-            &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
-          </span>
-          <p className="w-2 text-lg">or</p>
-          <span className="text-slate-400">
-            &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
-          </span>
-        </div>
-        <div className="w-56 mx-auto mt-4 flex flex-col gap-3">
-          <Link
-            href="https://circle7.codes/api/v1/users/auth/google"
-            className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
-          >
-            Sign in with Google
-          </Link>
-          <Link
-            href="https://circle7.codes/api/v1/users/auth/github"
-            className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
-          >
-            Sign in with GitHub
-          </Link>
-        </div>
       </div>
     </>
   );
