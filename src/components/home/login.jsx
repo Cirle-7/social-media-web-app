@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import useValidation from '@hooks/use-Validation';
 import Button from '@ui/button';
 import Input from '@ui/input';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-function Login({login}) {
+function Login({ login }) {
   const [formIsValid, setFormIsValid] = useState(false);
 
   // FORM VALIDATION WITH CUSTOM HOOKS
@@ -52,7 +52,7 @@ function Login({login}) {
       <div className="w-8/12 mx-auto mt-6">
         <form onSubmit={submitFormHandler} className="flex flex-col gap-3">
           <Input
-            id='email'
+            id="email"
             type="email"
             value={emailState.value}
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -60,7 +60,7 @@ function Login({login}) {
             onChange={emailInputHandler}
           />
           <Input
-            id='password'
+            id="password"
             value={passwordState.value}
             type="password"
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -68,12 +68,12 @@ function Login({login}) {
             onChange={passwordInputHandler}
           />
           <div className="w-full flex flex-row justify-between">
-            <Link href='/signup'
-              className="hover:cursor-pointer"
-            >
+            <Link href="/signup" className="hover:cursor-pointer">
               Back to Sign Up
             </Link>
-            <Link className='hover:cursor-pointer' href='/forgotpassword'>forgot password</Link>
+            <Link className="hover:cursor-pointer" href="/forgotpassword">
+              forgot password
+            </Link>
           </div>
           <Button
             type="default"
@@ -84,7 +84,7 @@ function Login({login}) {
             }
             disabled={!formIsValid}
           >
-            Login
+            Sign in
           </Button>
         </form>
       </div>

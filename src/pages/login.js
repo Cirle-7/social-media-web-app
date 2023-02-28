@@ -12,7 +12,7 @@ function LoginPage() {
   const getResp = (res) => {
     const { data } = res;
     setUserStore(data.token, data.user);
-    router.push('/feed');
+    router.replace('/feed');
   };
   const login = useHttp('login', 'POST', getResp, 'login');
 
