@@ -3,24 +3,40 @@ import SidebarNav from '@components/feed/sidebarNavigation';
 import SidebarOptions from '@components/feed/sidebarOptions';
 import Trending from '@components/feed/trending';
 import { useUser } from '@hooks/use-User';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
 import {
-  BackpackIcon,
-  BellIcon,
-  EnvelopeClosedIcon,
   ExitIcon,
-  HomeIcon,
   PersonIcon,
   TextAlignJustifyIcon,
 } from '@radix-ui/react-icons';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { BellIcon, HomeIcon, MailIcon } from '../svg';
+
+import { useCallback } from 'react';
 import Button from '../button';
 import Input from '../input';
+import MobileSidebar from '../sidebar';
 
 const Post_FeedLayout = ({ children }) => {
-  const { replace, pathname } = useRouter();
+  const { replace, pathname, asPath, events } = useRouter();
   const { user: userStore, token, resetUserStore } = useUser();
   const [user, setUser] = useState({});
+  const [mobileSidebar, setMobileSidebar] = useState(false);
+
+  const closeMobileSidebar = useCallback(() => {
+    setMobileSidebar(false);
+  }, [setMobileSidebar]);
+
+  useEffect(() => {
+    //remove the sidebar on page change
+    events.on('routeChangeComplete', closeMobileSidebar);
+
+    return () => {
+      events.off('routeChangeComplete', closeMobileSidebar);
+    };
+  }, [events, closeMobileSidebar]);
 
   /** because zustand is using localStorage to persist &
        SSR pages cant't access local-storage, useEffect is used to only load the details from localSrorage on the client-sde
@@ -36,10 +52,13 @@ const Post_FeedLayout = ({ children }) => {
     replace('/');
   };
   const onProfilePage = pathname.includes('profile');
+  const username = user.username !== null ? user.username : 'Username';
+  const displayName =
+    user.displayName !== null ? user.displayName : 'displayName';
 
   return (
     <div className="bg-primary text-black flex">
-      {/** Left Sidebar / User Options */}
+      {/** Tablet & Desktop --> Left Sidebar / User Options */}
       <section className="hidden w-20 md:grid h-[100vh] overflow-y-scroll scrollbar-hide">
         <div className="grid place-items-center py-[1rem]  ">
           <h2>LOGO</h2>
@@ -48,7 +67,7 @@ const Post_FeedLayout = ({ children }) => {
           <SidebarOptions />
           <div className="mt-[1rem] grid place-items-center gap-1">
             <PersonIcon />
-            <h2>{user.username !== null ? user.username : 'Username'}</h2>
+            <h2>{username}</h2>
             <Button className="btn bg-black text-white" onClick={logout}>
               <ExitIcon /> <span className="ml-2">Log Out</span>
             </Button>
@@ -56,18 +75,29 @@ const Post_FeedLayout = ({ children }) => {
         </div>
       </section>
 
+      {/** Mobile Header on /Feed Page*/}
       {!onProfilePage ? (
-        <section className="bg-accent z-[3] flex items-center justify-between w-screen md:hidden px-3 py-3 fixed top-0">
+        <section className="bg-white z-[3] flex items-center justify-between w-screen md:hidden px-3 py-3 fixed top-0">
           <h2 className="font-semibold text-[1rem] ">LOGO</h2>
-          <div className="p-1">
+          <div className="p-1" onClick={() => setMobileSidebar(true)}>
             <TextAlignJustifyIcon width={22} height={24} />
           </div>
         </section>
       ) : null}
 
+      {/** Mobile Sidebar */}
+      {mobileSidebar ? (
+        <MobileSidebar
+          key={asPath}
+          username={username}
+          displayName={displayName}
+          setMobileSidebar={setMobileSidebar}
+        />
+      ) : null}
+
       <>{children}</>
 
-      {/** Right Side Bar : Trending, Events & Co. */}
+      {/** Tablet & Desktop --> Right Side Bar : Trending, Events & Co. */}
       <section
         className="md:grid bg-primary hidden border border-solid 
         w-[25vw] h-[100vh] overflow-y-scroll  scrollbar-hide"
@@ -102,27 +132,73 @@ const Post_FeedLayout = ({ children }) => {
         </section>
       </section>
 
+      {/** Mobile -->  Footer Navigation on Mobile (Only shows in /feed) */}
       {!onProfilePage ? (
-        <div className="bg-accent  w-[100vw] absolute bottom-0 z-[3] py-2 px-4 text-black md:hidden">
+        <nav className="bg-accent  w-[100vw] absolute bottom-0 z-[3] py-2 px-4 text-black md:hidden">
           <ul className="list-none flex items-center justify-between ">
-            <li className="grid place-items-center font-semibold">
-              <HomeIcon /> <span>Feed</span>
+            <li>
+              <Link
+                href="/feed"
+                className="grid place-items-center font-semibold "
+              >
+                <>
+                  {pathname === '/feed' ? <HomeIcon filled /> : <HomeIcon />}
+                  <span
+                    className={`text-[.8rem] ${
+                      pathname === '/feed' ? 'text-black' : 'text-text-accent'
+                    }`}
+                  >
+                    Feed
+                  </span>
+                </>
+              </Link>
             </li>
 
-            <li className="grid place-items-center font-semibold">
-              <EnvelopeClosedIcon /> <span>Messages</span>
+            <li>
+              <Link
+                href="/messages"
+                className="grid place-items-center font-semibold  relative py-1"
+              >
+                <>
+                  {pathname === '/messages' ? (
+                    <MailIcon filled />
+                  ) : (
+                    <MailIcon />
+                  )}
+                  <span
+                    className={`text-[.8rem] ${
+                      pathname === '/messages'
+                        ? 'text-black'
+                        : 'text-text-accent'
+                    }`}
+                  >
+                    Chat
+                  </span>
+                </>
+              </Link>
             </li>
-            <li className="grid place-items-center font-semibold">
+            {/* <li className="grid place-items-center font-semibold">
               <BackpackIcon />
               <span>Jobs</span>
-            </li>
+            </li> */}
 
-            <li className="grid place-items-center font-semibold">
-              <BellIcon />
-              <span>Notifications</span>
+            <li className="grid place-items-center font-semibold  relative py-1">
+              {pathname === '/messages' ? (
+                <>
+                  <BellIcon />
+                  <span className="text-[.8rem] text-black">Notifications</span>
+                </>
+              ) : (
+                <>
+                  <BellIcon filled />
+                  <span className="text-[.8rem] text-text-accent">
+                    Notifications
+                  </span>
+                </>
+              )}
             </li>
           </ul>
-        </div>
+        </nav>
       ) : null}
     </div>
   );

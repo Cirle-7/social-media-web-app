@@ -77,5 +77,10 @@ export const editPost = (data) => {
       'Allow-Control-Allow-Credentials': 'true',
     },
     body: JSON.stringify(data.textEdit),
-  });
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('edit response', data);
+      return data;
+    });
 };

@@ -8,7 +8,7 @@ import {
   Share2Icon,
 } from '@radix-ui/react-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { dislikePost, likePost } from '@utils/api';
+import { dislikePost, likePost } from '@utils/api-fns/posts';
 
 const Posts = ({ posts, isLoading }) => {
   const queryClient = useQueryClient();
@@ -53,8 +53,6 @@ const Posts = ({ posts, isLoading }) => {
     );
   }
 
-  console.log('Posst:', posts);
-
   return (
     <>
       {posts.map(({ post }) => (
@@ -72,25 +70,25 @@ const Posts = ({ posts, isLoading }) => {
             <div className="ml-2">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="font-bold m-0 p-0"> {post.user.username} </h2>
+                  <h2 className="font-bold m-0 p-0">{post.user.displayName}</h2>
                   <div className="flex items-center text-text-accent gap-2">
-                    <p className="font-base text-sm">
-                      @{post.user.displayName}{' '}
-                    </p>
+                    <p className="font-base text-sm">@{post.user.username} </p>
                     <div className="bg-text-accent w-[5px] h-[5px] rounded-full"></div>
                     <p className="text-sm">{post.createdAt}</p>
                   </div>
                 </div>
 
-                <PostOptions
-                  id={post.id}
-                  userId={post.user.id}
-                  text={post.body}
-                />
+                <div className="ml-5">
+                  <PostOptions
+                    id={post.id}
+                    userId={post.user.id}
+                    text={post.body}
+                  />
+                </div>
               </div>
 
               <p className="text-base mt-1">{post.body}</p>
-              {/** Interactio Icons */}
+              {/** Interaction Icons */}
               <ul className="list justify-between w-[70vw] md:w-[40vw] mt-3">
                 <li className="cursor-pointer">
                   <ChatBubbleIcon /> <span>{post.commentsNo}</span>

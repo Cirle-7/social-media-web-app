@@ -6,14 +6,15 @@ const useHttp = (url, method, getResponse, type) => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const timeout =  setTimeout(()=>{
-      setIsError(false)
-      setError('')
-    }, 3000)
-    return () => clearTimeout(timeout)
-  }, [error, isError])
+    const timeout = setTimeout(() => {
+      setIsError(false);
+      setError('');
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, [error, isError]);
 
   const postRequest = async (data) => {
+    console.log(data);
     setIsLoading(true);
     try {
       await fetch(`https://www.circle7.codes/api/v1/users/${url}`, {
@@ -30,16 +31,30 @@ const useHttp = (url, method, getResponse, type) => {
           if (data.status === 'Success' || data.status === 'success') {
             const response = data;
 
-            type !== 'passwordReset'? document.cookie = `token=${response.data.token}` : '';
+            type !== 'passwordReset'
+              ? (document.cookie = `token=${response.data.token}`)
+              : '';
             getResponse(response);
-            setIsError(true)
-            type === 'passwordReset'? setError('Token has been sent to your email') : type === 'signup'? setError('Signup was successful') : type === 'login'? setError('Logged in successfully') : '';
+            setIsError(true);
+            type === 'passwordReset'
+              ? setError('Token has been sent to your email')
+              : type === 'signup'
+              ? setError('Signup was successful')
+              : type === 'login'
+              ? setError('Logged in successfully')
+              : '';
           }
 
           if (data.status === 'Fail') {
             setIsError(true);
 
-            type === 'login'? setError('Email or password is incorrect') : type === 'signup'? setError('This user already exists') : type === 'passwordReset'? setError('something went wrong') : '';
+            type === 'login'
+              ? setError('Email or password is incorrect')
+              : type === 'signup'
+              ? setError('This user already exists')
+              : type === 'passwordReset'
+              ? setError('something went wrong')
+              : '';
           }
         });
     } catch (error) {
@@ -49,8 +64,8 @@ const useHttp = (url, method, getResponse, type) => {
         console.log('err.req', { error: error.request });
       } else if (error.message) {
         console.log('err.msg', { error });
-        setIsError(true)
-        setError('Unable to execute request!')
+        setIsError(true);
+        setError('Unable to execute request!');
       }
     }
 
