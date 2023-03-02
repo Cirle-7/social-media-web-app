@@ -1,5 +1,6 @@
 import Posts from '@components/feed/posts';
 import Button from '@components/ui/button';
+import MobileSidebar from '@components/ui/sidebar';
 import { useUser } from '@hooks/use-User';
 import {
   ArrowLeftIcon,
@@ -9,26 +10,66 @@ import {
   TextAlignJustifyIcon,
 } from '@radix-ui/react-icons';
 import { useQuery } from '@tanstack/react-query';
-import { getUserPosts } from '@utils/api';
+import { getUserPosts } from '@utils/api-fns/posts';
+import { getUserProfile } from '@utils/api-fns/profile';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 
 const Profile = () => {
+  const { asPath, events } = useRouter();
   const [user, setUser] = useState({});
   const { user: userStore } = useUser();
   useEffect(() => {
     setUser(userStore);
   }, [userStore]);
+  const username = user.username !== null ? user.username : 'Username';
+  const displayName =
+    user.displayName !== null ? user.displayName : 'displayName';
+
+  const [mobileSidebar, setMobileSidebar] = useState(false);
+
+  const closeMobileSidebar = useCallback(() => {
+    setMobileSidebar(false);
+  }, [setMobileSidebar]);
+
+  useEffect(() => {
+    //remove the sidebar on page change
+    events.on('routeChangeComplete', closeMobileSidebar);
+
+    return () => {
+      events.off('routeChangeComplete', closeMobileSidebar);
+    };
+  }, [events, closeMobileSidebar]);
 
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ['userPosts'],
     queryFn: getUserPosts,
   });
 
-  const allPosts = data.allPosts;
+  const {
+    data: profileData,
+    error: profileError,
+    isError: profileIsError,
+    isLoading: profileIsLoading,
+  } = useQuery({
+    queryKey: ['userProfile'],
+    queryFn: () => {
+      return getUserProfile(user.username);
+    },
+    enabled: (user && user.username) !== undefined,
+  });
 
-  console.log('userdata', allPosts);
+  if (isLoading || profileIsLoading) {
+    return (
+      <div className="w-[100vw] md:w-[55vw] h-[100vh] overflow-y-scroll scrollbar-hide grid place-items-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+  const allPosts = data.allPosts;
+  console.log('user profile', profileData);
 
   return (
     <div className="w-[100vw] md:w-[55vw] h-[100vh] overflow-y-scroll scrollbar-hide">
@@ -50,11 +91,22 @@ const Profile = () => {
               </Link>
             </div>
 
-            <div className="bg-slate-800 rounded-full p-1">
+            <div
+              className="bg-slate-800 rounded-full p-1 "
+              onClick={() => setMobileSidebar(true)}
+            >
               <TextAlignJustifyIcon color="white" width={20} height={20} />
             </div>
           </div>
         </div>
+
+        {mobileSidebar ? (
+          <MobileSidebar
+            username={username}
+            displayName={displayName}
+            setMobileSidebar={setMobileSidebar}
+          />
+        ) : null}
 
         <section className="bg-accent px-4 py-2 relative">
           <div className="flex items-center justify-between mt-[1rem]">
@@ -67,15 +119,12 @@ const Profile = () => {
             </div>
 
             <Button className="mr-[3rem] flex justify-end absolute right-0 items-center gap-1 font-semibold">
-              {' '}
               <Pencil2Icon /> Edit Profile
             </Button>
           </div>
-          <h1 className="font-bold m-0 p-0 text-[1.15rem]">
-            {user.username !== null ? user.username : 'Username'}
-          </h1>
+          <h1 className="font-bold m-0 p-0 text-[1.15rem]">{displayName}</h1>
           <p className="m-0 p-0 text-text-accent font-semibold text-[.9rem]">
-            {user.displayName !== null ? `@${user.displayName}` : 'username'}
+            @{username}
           </p>
 
           <p className="mt-[1rem] text-[.95rem] font-semibold">

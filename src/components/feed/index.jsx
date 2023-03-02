@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUserPosts } from '@utils/api';
+import { getUserPosts } from '@utils/api-fns/posts';
 import { useRouter } from 'next/router';
 import PostBox from './postBox';
 import Posts from './posts';
@@ -17,13 +17,11 @@ const Feed = () => {
   return (
     <section className="w-[100vw] md:w-[55vw] h-[100vh] md:overflow-y-scroll md:scrollbar-hide">
       <div className="grid place-items-center ">
-        {/** Mobile Header */}
-
         {/*Post Box*/}
         <PostBox />
 
         {/** Posts Section */}
-        <section className="grid gap-3 my-[4rem] md:my-3">
+        <section className="grid gap-3  md:my-3">
           <Posts posts={allPosts} />
         </section>
       </div>

@@ -1,8 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { editPost } from '@utils/api';
+import { editPost } from '@utils/api-fns/posts';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const EditPost = ({ id, text }) => {
   const [textEdit, setTextEdit] = useState(text);
@@ -10,9 +11,15 @@ const EditPost = ({ id, text }) => {
 
   const editMutation = useMutation({
     mutationFn: editPost,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data.status && (data.status === 'error' || data.status === 'Error')) {
+        return toast.error('Error editing post');
+      }
+      toast.success('Post edit successful');
       queryClient.invalidateQueries({ queryKey: ['userPosts'] });
-      // toast.success('Edit made successfully');
+    },
+    onError: () => {
+      toast.error('Error sending post');
     },
   });
 

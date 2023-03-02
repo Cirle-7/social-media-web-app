@@ -1,5 +1,4 @@
 import Button from '@components/ui/button';
-import Input from '@components/ui/input';
 import {
   BarChartIcon,
   FaceIcon,
@@ -8,7 +7,7 @@ import {
   VideoIcon,
 } from '@radix-ui/react-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { makePost } from '@utils/api';
+import { makePost } from '@utils/api-fns/posts';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -23,6 +22,9 @@ const PostBox = () => {
       toast.success('Post sent successfully');
       setText('');
     },
+    onError: () => {
+      toast.error('Error sending post');
+    },
   });
 
   const createPost = (event) => {
@@ -36,27 +38,32 @@ const PostBox = () => {
   };
 
   return (
-    <section className=" hidden bg-accent w-[100vw] md:w-[55vw] px-3 py-4 md:flex items-center">
-      <div className="ml-[.5rem] w-[40px] h-[40px] rounded-full border-2 border-black grid place-items-center">
+    <section className=" bg-accent mt-[3rem] md:mt-0 w-[100vw] md:w-[55vw] px-3 py-4 md:flex items-center">
+      <div className=" hidden ml-[.5rem] w-[40px] h-[40px] rounded-full border-2 border-black md:grid place-items-center">
         <PersonIcon width="30" height="30" />
       </div>
 
-      <div className="ml-[2.5rem]">
+      <div className="md:ml-[2.5rem]">
         <form action="" onSubmit={createPost}>
           <label htmlFor="post"></label>
-          <Input
+          <textarea
             type="text"
             name="post"
             placeholder="Say something"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            className="py-[.4rem] px-[.4rem] w-[60vw] md:w-[40vw] rounded-sm"
+            className="py-[.4rem] px-[.4rem] w-[90vw] md:w-[40vw] rounded-sm"
           />
 
-          <ul className="postBoxItems mt-[.5rem] w-[40vw] justify-between">
+          {/* <div className="flex justify-end">
+            <span className="text-text-accent text-sm">
+              {`${text.length} char${text.length > 1 ? 's' : ''}`}
+            </span>
+          </div> */}
+          <ul className=" flex my-[0] mx-auto md:flex  postBoxItems mt-[.5rem] md:w-[40vw] justify-between">
             <li className="cursor-pointer">
               <VideoIcon />
-              <span>Live Video</span>{' '}
+              <span>Live</span>{' '}
             </li>
             <li className="cursor-pointer">
               <ImageIcon />
@@ -73,10 +80,10 @@ const PostBox = () => {
             </li>
           </ul>
 
-          <div className="flex mt-3 justify-end gap-2">
+          <div className="flex mt-3 justify-center gap-2">
             <Button
               type="button"
-              className="border border-black rounded-md font-medium py-[.2rem] px-[.5rem]"
+              className="border  border-black rounded-md text-sm md:font-medium py-[.2rem] px-[.5rem]"
             >
               Save in draft
             </Button>
