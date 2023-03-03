@@ -1,9 +1,9 @@
-import Login from "@components/home/login";
-import LoadingAnimation from "@components/ui/loading";
-import useHttp from "@hooks/use-Auth";
-import StatusMessage from "@ui/statusMessage";
-import { useUserStore } from "@utils/store";
-import { useRouter } from "next/router";
+import Login from '@components/home/login';
+import LoadingAnimation from '@components/ui/loading';
+import useHttp from '@hooks/use-Auth';
+import StatusMessage from '@ui/statusMessage';
+import { useUserStore } from '@utils/store';
+import { useRouter } from 'next/router';
 
 function LoginPage() {
   const setUserStore = useUserStore((state) => state.setUserStore);
@@ -25,4 +25,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage
+export default LoginPage;

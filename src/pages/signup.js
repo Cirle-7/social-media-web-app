@@ -1,9 +1,9 @@
 import SignUp from '@components/home/signUp';
-import LoadingAnimation from '@ui/loading';
 import useHttp from '@hooks/use-Auth';
+import LoadingAnimation from '@ui/loading';
+import StatusMessage from '@ui/statusMessage';
 import { useUserStore } from '@utils/store';
 import { useRouter } from 'next/router';
-import StatusMessage from '@ui/statusMessage';
 
 function SignupPage() {
   const setUserStore = useUserStore((state) => state.setUserStore);
