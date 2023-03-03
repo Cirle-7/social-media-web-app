@@ -31,9 +31,7 @@ const useHttp = (url, method, getResponse, type) => {
           if (data.status === 'Success' || data.status === 'success') {
             const response = data;
 
-            type !== 'passwordReset'
-              ? (document.cookie = `token=${response.data.token}`)
-              : '';
+            type !== 'passwordReset'? document.cookie = `token=${response.data.token}; expires=${new Date(Date.now() + (60 * 60 * 1000)).toUTCString()};` : '';
             getResponse(response);
             setIsError(true);
             type === 'passwordReset'

@@ -12,7 +12,7 @@ function SignupPage() {
   const getResp = (res) => {
     const { data } = res;
     setUserStore(data.token, data.user);
-    router.replace('/feed');
+    router.push('/feed');
   };
 
   const signup = useHttp('signup', 'POST', getResp, 'signup');
