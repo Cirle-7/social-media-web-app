@@ -10,37 +10,37 @@ const MobileSidebar = ({ setMobileSidebar, username, displayName }) => {
       ></section>
 
       <section className="w-[75vw] bg-accent">
-        <section className="mt-4 px-2 h-[10vh]">
+        <section className="mt-4 px-5 h-[15vh] pt-5">
           <div className="flex items-center  gap-3 h-fit">
             <div
-              className=" w-[40px] h-[40px] rounded-full border-2 border-black grid place-items-center
+              className=" w-[70px] h-[70px] rounded-full border-2 border-black grid place-items-center
                bg-white"
             >
               <PersonIcon width="35" height="35" />
             </div>
 
-            <div>
-              <h1 className="m-0 p-0 font-bold ">{displayName}</h1>
-              <p className="m-0 p-0 text-text-accent font-semibold text-sm">
+            <div className="">
+              <h1 className="m-0 p-0 font-bold text-xl">{displayName}</h1>
+              <p className="m-0 p-0 text-text-accent font-semibold text-medium">
                 @{username}
               </p>
             </div>
           </div>
 
-          <ul className="flex mt-3 items-center gap-3">
-            <li className="text-sm">
+          <ul className="flex mt-3 ml-3 items-center gap-3">
+            <li className="text-[1rem] font-semibold">
               <strong>832</strong>
-              <span className="text-text-accent ml-2">Following</span>
+              <span className="text-text-accent ml-1">Following</span>
             </li>
-            <li className="text-sm">
+            <li className="text-[1rem] font-semibold">
               <strong>832</strong>
-              <span className="text-text-accent ml-2">Followers</span>
+              <span className="text-text-accent ml-1">Followers</span>
             </li>
           </ul>
         </section>
 
-        <section className="bg-white h-[80vh] px-2">
-          <ul className=" grid gap-2 mt-2 text-sm">
+        <section className="bg-white h-[80vh] px-5 mt-3 py-4">
+          <ul className=" grid gap-2 mt-2 text-[1.17rem]">
             <li className="items-center font-semibold">
               <Link href="/profile" className="flex items-center ">
                 <>

@@ -18,7 +18,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
 const Profile = () => {
-  const { asPath, events } = useRouter();
+  const { events } = useRouter();
   const [user, setUser] = useState({});
   const { user: userStore } = useUser();
   useEffect(() => {
@@ -87,7 +87,7 @@ const Profile = () => {
           <div className="flex justify-between w-[100vw] md:hidden z-[2] absolute top-0 py-3 px-3">
             <div className="bg-slate-800 rounded-full p-1">
               <Link href="/feed">
-                <ArrowLeftIcon color="white" width={20} height={20} />
+                <ArrowLeftIcon color="white" width={28} height={27} />
               </Link>
             </div>
 
@@ -95,7 +95,7 @@ const Profile = () => {
               className="bg-slate-800 rounded-full p-1 "
               onClick={() => setMobileSidebar(true)}
             >
-              <TextAlignJustifyIcon color="white" width={20} height={20} />
+              <TextAlignJustifyIcon color="white" width={28} height={27} />
             </div>
           </div>
         </div>
@@ -111,18 +111,22 @@ const Profile = () => {
         <section className="bg-accent px-4 py-2 relative">
           <div className="flex items-center justify-between mt-[1rem]">
             <div
-              className="ml-[.5rem] w-[55px] h-[55px] rounded-full border-2 border-black grid place-items-center
+              className="ml-[.5rem] w-[70px] h-[70px] rounded-full border-2 border-black grid place-items-center
               absolute top-[-2.3rem] bg-white
             "
             >
               <PersonIcon width="50" height="50" />
             </div>
 
-            <Button className="mr-[3rem] flex justify-end absolute right-0 items-center gap-1 font-semibold">
-              <Pencil2Icon /> Edit Profile
+            <Button
+              className="mt-16 mr-5 md:mr-[3rem] flex justify-end absolute right-0 items-center gap-1 font-medium
+              border border-text-accent py-1 px-2 rounded-full text-[.9rem]"
+            >
+              <Pencil2Icon width={20} height={20} />
+              Edit Profile
             </Button>
           </div>
-          <h1 className="font-bold m-0 p-0 text-[1.15rem]">{displayName}</h1>
+          <h1 className="font-bold mt-3 p-0 text-[1.15rem]">{displayName}</h1>
           <p className="m-0 p-0 text-text-accent font-semibold text-[.9rem]">
             @{username}
           </p>

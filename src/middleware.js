@@ -5,7 +5,7 @@ export default async function middleware(req) {
   const pathName = req.nextUrl.pathname;
 
   if (!token && pathName !== '/login') {
-    if(pathName !== '/signup') {
+    if (pathName !== '/signup') {
       const loginUrl = new URL('/login', req.url);
       return NextResponse.redirect(loginUrl);
     }

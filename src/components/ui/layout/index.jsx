@@ -20,8 +20,8 @@ import Input from '../input';
 import MobileSidebar from '../sidebar';
 
 const Post_FeedLayout = ({ children }) => {
-  const { replace, pathname, asPath, events } = useRouter();
-  const { user: userStore, token, resetUserStore } = useUser();
+  const { replace, pathname, events } = useRouter();
+  const { user: userStore, resetUserStore } = useUser();
   const [user, setUser] = useState({});
   const [mobileSidebar, setMobileSidebar] = useState(false);
 
@@ -80,7 +80,7 @@ const Post_FeedLayout = ({ children }) => {
         <section className="bg-white z-[3] flex items-center justify-between w-screen md:hidden px-3 py-3 fixed top-0">
           <h2 className="font-semibold text-[1rem] ">LOGO</h2>
           <div className="p-1" onClick={() => setMobileSidebar(true)}>
-            <TextAlignJustifyIcon width={22} height={24} />
+            <TextAlignJustifyIcon width={38} height={37} />
           </div>
         </section>
       ) : null}
@@ -88,7 +88,6 @@ const Post_FeedLayout = ({ children }) => {
       {/** Mobile Sidebar */}
       {mobileSidebar ? (
         <MobileSidebar
-          key={asPath}
           username={username}
           displayName={displayName}
           setMobileSidebar={setMobileSidebar}
@@ -134,8 +133,8 @@ const Post_FeedLayout = ({ children }) => {
 
       {/** Mobile -->  Footer Navigation on Mobile (Only shows in /feed) */}
       {!onProfilePage ? (
-        <nav className="bg-accent  w-[100vw] absolute bottom-0 z-[3] py-2 px-4 text-black md:hidden">
-          <ul className="list-none flex items-center justify-between ">
+        <nav className="bg-accent  w-[100vw] absolute bottom-0 z-[3] py-2 text-black md:hidden">
+          <ul className="list-none flex items-center justify-between px-10 text-[.9rem] ">
             <li>
               <Link
                 href="/feed"
@@ -144,7 +143,7 @@ const Post_FeedLayout = ({ children }) => {
                 <>
                   {pathname === '/feed' ? <HomeIcon filled /> : <HomeIcon />}
                   <span
-                    className={`text-[.8rem] ${
+                    className={` ${
                       pathname === '/feed' ? 'text-black' : 'text-text-accent'
                     }`}
                   >
@@ -166,13 +165,13 @@ const Post_FeedLayout = ({ children }) => {
                     <MailIcon />
                   )}
                   <span
-                    className={`text-[.8rem] ${
+                    className={` ${
                       pathname === '/messages'
                         ? 'text-black'
                         : 'text-text-accent'
                     }`}
                   >
-                    Chat
+                    Messages
                   </span>
                 </>
               </Link>
@@ -186,14 +185,12 @@ const Post_FeedLayout = ({ children }) => {
               {pathname === '/messages' ? (
                 <>
                   <BellIcon />
-                  <span className="text-[.8rem] text-black">Notifications</span>
+                  <span className=" text-black">Notifications</span>
                 </>
               ) : (
                 <>
                   <BellIcon filled />
-                  <span className="text-[.8rem] text-text-accent">
-                    Notifications
-                  </span>
+                  <span className=" text-text-accent">Notifications</span>
                 </>
               )}
             </li>
