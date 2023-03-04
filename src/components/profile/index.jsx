@@ -19,11 +19,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 const Profile = () => {
   const { events } = useRouter();
-  const [user, setUser] = useState({});
-  const { user: userStore } = useUser();
-  useEffect(() => {
-    setUser(userStore);
-  }, [userStore]);
+  const { user } = useUser();
   const username = user.username !== null ? user.username : 'Username';
   const displayName =
     user.displayName !== null ? user.displayName : 'displayName';
