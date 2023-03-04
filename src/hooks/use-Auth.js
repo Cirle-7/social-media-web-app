@@ -32,7 +32,11 @@ const useHttp = (url, method, getResponse, type) => {
             const response = data;
 
             type !== 'passwordReset'
-              ? (document.cookie = `token=${response.data.token}`)
+              ? (document.cookie = `token=${
+                  response.data.token
+                }; expires=${new Date(
+                  Date.now() + 60 * 60 * 1000
+                ).toUTCString()};`)
               : '';
             getResponse(response);
             setIsError(true);

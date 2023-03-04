@@ -1,9 +1,9 @@
 import SignUp from '@components/home/signUp';
-import LoadingAnimation from '@ui/loading';
 import useHttp from '@hooks/use-Auth';
+import LoadingAnimation from '@ui/loading';
+import StatusMessage from '@ui/statusMessage';
 import { useUserStore } from '@utils/store';
 import { useRouter } from 'next/router';
-import StatusMessage from '@ui/statusMessage';
 
 function SignupPage() {
   const setUserStore = useUserStore((state) => state.setUserStore);
@@ -12,7 +12,7 @@ function SignupPage() {
   const getResp = (res) => {
     const { data } = res;
     setUserStore(data.token, data.user);
-    router.replace('/feed');
+    router.push('/feed');
   };
 
   const signup = useHttp('signup', 'POST', getResp, 'signup');
