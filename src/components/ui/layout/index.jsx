@@ -21,8 +21,7 @@ import MobileSidebar from '../sidebar';
 
 const Post_FeedLayout = ({ children }) => {
   const { replace, pathname, events } = useRouter();
-  const { user: userStore, resetUserStore } = useUser();
-  const [user, setUser] = useState({});
+  const { user, resetUserStore } = useUser();
   const [mobileSidebar, setMobileSidebar] = useState(false);
 
   const closeMobileSidebar = useCallback(() => {
@@ -37,14 +36,6 @@ const Post_FeedLayout = ({ children }) => {
       events.off('routeChangeComplete', closeMobileSidebar);
     };
   }, [events, closeMobileSidebar]);
-
-  /** because zustand is using localStorage to persist &
-       SSR pages cant't access local-storage, useEffect is used to only load the details from localSrorage on the client-sde
-       */
-
-  useEffect(() => {
-    setUser(userStore);
-  }, [userStore]);
 
   const logout = () => {
     document.cookie = `token=;expires=${Date.now()}`;
@@ -133,7 +124,7 @@ const Post_FeedLayout = ({ children }) => {
 
       {/** Mobile -->  Footer Navigation on Mobile (Only shows in /feed) */}
       {!onProfilePage ? (
-        <nav className="bg-accent  w-[100vw] absolute bottom-0 z-[3] py-2 text-black md:hidden">
+        <nav className="bg-accent  w-[100vw] fixed bottom-0 z-[3] py-2 text-black md:hidden">
           <ul className="list-none flex items-center justify-between px-10 text-[.9rem] ">
             <li>
               <Link

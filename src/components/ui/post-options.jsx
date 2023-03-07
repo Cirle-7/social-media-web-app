@@ -3,16 +3,11 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deletePost } from '@utils/api-fns/posts';
-import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import EditPost from './edit-post-dialog';
 
 const PostOptions = ({ id, userId, text }) => {
-  const [user, setUser] = useState({});
-  const { user: userStore } = useUser();
-  useEffect(() => {
-    setUser(userStore);
-  }, [userStore]);
+  const { user } = useUser();
 
   const queryClient = useQueryClient();
 

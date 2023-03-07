@@ -1,4 +1,5 @@
 import PostOptions from '@components/ui/post-options';
+import { useUser } from '@hooks/use-User';
 import {
   BarChartIcon,
   ChatBubbleIcon,
@@ -11,6 +12,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { dislikePost, likePost } from '@utils/api-fns/posts';
 
 const Posts = ({ posts, isLoading }) => {
+  const { user } = useUser();
+
   const queryClient = useQueryClient();
 
   const likeMutation = useMutation({
@@ -94,7 +97,7 @@ const Posts = ({ posts, isLoading }) => {
                   <ChatBubbleIcon /> <span>{post.commentsNo}</span>
                 </li>
 
-                {post.likes.map((data) => data.userId).includes(1) ? (
+                {post.likes.map((data) => data.userId).includes(user.id) ? (
                   <li onClick={() => dislikeAPost(post.id)}>
                     <HeartFilledIcon />
                     <span>{post.likesNo}</span>

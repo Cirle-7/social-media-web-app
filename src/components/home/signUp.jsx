@@ -79,7 +79,7 @@ function SignUp({ signup }) {
       <div className="pt-24 sm:mt-24 sm:pt-0">
         <h1 className="w-min text-5xl font-bold mx-auto">LOGO</h1>
       </div>
-      <div className="w-8/12 mx-auto mt-6">
+      <div className="w-8/12 min-h-[650px] sm:min-h-fit mx-auto mt-6">
         <form onSubmit={signupFormHandler} className="flex flex-col gap-3">
           <Input
             id="username"
