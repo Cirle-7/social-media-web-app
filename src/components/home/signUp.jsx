@@ -79,7 +79,7 @@ function SignUp({ signup }) {
       <div className="pt-24 sm:mt-24 sm:pt-0">
         <h1 className="w-min text-5xl font-bold mx-auto">LOGO</h1>
       </div>
-      <div className="w-8/12 min-h-[650px] sm:min-h-fit mx-auto mt-6">
+      <div className="w-8/12 min-h-[580px] sm:min-h-fit mx-auto mt-6">
         <form onSubmit={signupFormHandler} className="flex flex-col gap-3">
           <Input
             id="username"
@@ -145,18 +145,18 @@ function SignUp({ signup }) {
             href="https://circle7.codes/api/v1/users/auth/google"
             className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
           >
-            Sign up with Google
+            Sign in with Google
           </Link>
           <Link
             href="https://circle7.codes/api/v1/users/auth/github"
             className="w-full h-10 flex justify-center items-center border-none rounded-lg text-white text-sm bg-slate-900"
           >
-            Sign up with GitHub
+            Sign in with GitHub
           </Link>
           {/* <Button className="w-full h-10 border-none rounded-lg text-white text-sm bg-slate-900">
             Sign up with Phone Number
           </Button> */}
-          <small className="block mt-0 mx-auto">
+          <small className="block mt-3 mx-auto">
             Already have an account?
             <Link href="/login" className="font-bold">
               Sign in
