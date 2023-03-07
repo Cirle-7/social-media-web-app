@@ -26,8 +26,8 @@ function AuthLayout({ children }) {
 
   return (
     <>
-      <section className="sm:min-w-full sm:min-h-screen sm:grid sm:grid-cols-5">
-        <div className="sm:min-w-full sm:h-screen bg-slate-50 sm:col-span-3">
+      <section className="min-h-screen sm:min-w-full sm:min-h-screen sm:grid sm:grid-cols-5">
+        <div className="min-h-screen sm:min-w-full sm:h-screen bg-slate-50 sm:col-span-3">
           {children}
         </div>
         <div className="hidden sm:block sm:min-w-full sm:h-screen sm:bg-slate-800 sm:col-span-2">
