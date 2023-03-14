@@ -69,6 +69,7 @@ export const deletePost = (id) => {
 
 export const editPost = (data) => {
   console.log('Edit Params', data);
+  console.log({ body: data.textEdit });
   return fetch(`https://www.circle7.codes/api/v1/post/${data.id}`, {
     method: 'PATCH',
     credentials: 'include',
@@ -76,7 +77,7 @@ export const editPost = (data) => {
       'Content-Type': 'application/json',
       'Allow-Control-Allow-Credentials': 'true',
     },
-    body: JSON.stringify(data.textEdit),
+    body: `${data.textEdit}`,
   })
     .then((response) => response.json())
     .then((data) => {

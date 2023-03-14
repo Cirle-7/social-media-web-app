@@ -1,10 +1,8 @@
 import Posts from '@components/feed/posts';
-import Button from '@components/ui/button';
 import MobileSidebar from '@components/ui/sidebar';
 import { useUser } from '@hooks/use-User';
 import {
   ArrowLeftIcon,
-  Pencil2Icon,
   PersonIcon,
   SewingPinIcon,
   TextAlignJustifyIcon,
@@ -16,6 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import EditProfile from './edit-profile';
 
 const Profile = () => {
   const { events } = useRouter();
@@ -23,7 +22,7 @@ const Profile = () => {
   const username = user.username !== null ? user.username : 'Username';
   const displayName =
     user.displayName !== null ? user.displayName : 'displayName';
-
+  const userId = user.id !== 0 ? user.id : 0;
   const [mobileSidebar, setMobileSidebar] = useState(false);
 
   const closeMobileSidebar = useCallback(() => {
@@ -65,6 +64,8 @@ const Profile = () => {
     );
   }
   const allPosts = data.allPosts;
+
+  const profile = profileData.data.profile;
   console.log('user profile', profileData);
 
   return (
@@ -114,42 +115,43 @@ const Profile = () => {
               <PersonIcon width="50" height="50" />
             </div>
 
-            <Button
-              className="mt-16 mr-5 md:mr-[3rem] flex justify-end absolute right-0 items-center gap-1 font-medium
-              border border-text-accent py-1 px-2 rounded-full text-[.9rem]"
-            >
-              <Pencil2Icon width={20} height={20} />
-              Edit Profile
-            </Button>
+            <EditProfile id={userId} profile={profile} />
           </div>
-          <h1 className="font-bold mt-3 p-0 text-[1.15rem]">{displayName}</h1>
+          <h1 className="font-bold mt-3 p-0 text-[1.15rem]">
+            {profile.displayName}
+          </h1>
           <p className="m-0 p-0 text-text-accent font-semibold text-[.9rem]">
-            @{username}
+            @{profile.username}
           </p>
 
-          <p className="mt-[1rem] text-[.95rem] font-semibold">
-            I&apos;m a fullstack developer/software engineer and I am open to
-            remote jobs
-          </p>
+          <p className="mt-[1rem] text-[.95rem] font-semibold">{profile.Bio}</p>
 
-          <p className="mt-[.5rem] text-[.9rem] font-semibold text-text-accent">
-            Talks about : #SWE #Gaming #BackendEngineering #EmbeddedSystems
-            #SysAdmin
-          </p>
+          {profile.website.trim().length > 0 ? (
+            <p className="mt-[.5rem] text-[.9rem] font-semibold text-text-accent">
+              Website: <span className="underline">{profile.website}</span>
+            </p>
+          ) : null}
 
           <p className="mt-[.3rem] text-[.9rem] flex items-center gap-1 font-semibold text-text-accent">
-            <SewingPinIcon /> Port Harcout, Nigeria
+            {profile.location === null ? null : (
+              <>
+                <SewingPinIcon /> Port Harcout, Nigeria
+              </>
+            )}
           </p>
 
           <ul className="flex list-none gap-3 mt-3 font-medium">
-            <li>
+            {/* <li>
               <strong>894</strong> Posts
             </li>
             <li>
               <strong>87</strong> Following
-            </li>
+            </li> */}
             <li>
-              <strong>845k</strong> Followers
+              <strong>
+                {profile.followers === null ? 0 : profile.followers}
+              </strong>{' '}
+              Followers
             </li>
           </ul>
 

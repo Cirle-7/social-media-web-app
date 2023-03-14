@@ -43,7 +43,7 @@ const PostOptions = ({ id, userId, text }) => {
           sideOffset={5}
         >
           {user.id === userId ? (
-            <DropdownMenu.Sub className="group text-[.95rem] font-medium leading-none text-back rounded-[3px] flex items-center h-[25px]  relative px-[1rem]  select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none   hover:bg-accent">
+            <DropdownMenu.Sub>
               <EditPost id={id} text={text} />
             </DropdownMenu.Sub>
           ) : null}

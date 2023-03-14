@@ -27,6 +27,16 @@ const PostBox = () => {
     },
   });
 
+  const [file, setFile] = useState('');
+
+  const handleFileChange = (e) => {
+    if (e.target.files) {
+      console.log(e.target.files[0]);
+
+      setFile(e.target.files[0]);
+    }
+  };
+
   const createPost = (event) => {
     event.preventDefault();
     const form = new FormData(event.target);
@@ -65,9 +75,23 @@ const PostBox = () => {
               <VideoIcon />
               <span>Live</span>{' '}
             </li>
-            <li className="cursor-pointer">
-              <ImageIcon />
-              <span>Photos/Video</span>{' '}
+            <li className="cursor-pointer grid w-fit">
+              <div class="relative w-fit h-fit flex justify-center items-center">
+                <label htmlFor="file-upload"></label>
+                <input
+                  accept="image/*"
+                  class="relative opacity-0 w-[4.3rem] z-10 cursor-pointer"
+                  type="file"
+                  name="file-upload"
+                  onChange={(e) => handleFileChange(e)}
+                />
+                <div class="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
+                  <p class="flex items-center gap-1 ">
+                    <ImageIcon />
+                    <span>Photos</span>
+                  </p>
+                </div>
+              </div>
             </li>
             <li className="cursor-pointer">
               <BarChartIcon />
