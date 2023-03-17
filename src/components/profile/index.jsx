@@ -66,7 +66,6 @@ const Profile = () => {
   const allPosts = data.allPosts;
 
   const profile = profileData.data.profile;
-  console.log('user profile', profileData);
 
   return (
     <div className="w-[100vw] md:w-[55vw] h-[100vh] overflow-y-scroll scrollbar-hide">

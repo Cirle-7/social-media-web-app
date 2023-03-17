@@ -55,8 +55,6 @@ const EditProfile = ({ id, profile }) => {
 
   const editUserProfile = () => {
     if (id === 0) return;
-    console.log(id);
-    console.log(profileEdit);
     editProfileMutation.mutate({
       id,
       username: profile.username,

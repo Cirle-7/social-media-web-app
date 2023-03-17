@@ -1,5 +1,4 @@
 export const getUserProfile = (username) => {
-  console.log('username: ', username);
   return fetch(`https://www.circle7.codes/api/v1/profiles/${username}`, {
     method: 'GET',
     credentials: 'include',
@@ -32,9 +31,9 @@ export const editDisplayName = (data) => {
 };
 
 export const editProfile = (data) => {
-  console.log('eP', data);
+  console.log('profile edit object', data);
 
-  return fetch(`https://www.circle7.codes/api/v1/profiles/${data.username}`, {
+  return fetch(`https://www.circle7.codes/api/v1/profiles/${data.id}`, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
@@ -49,23 +48,3 @@ export const editProfile = (data) => {
       return data;
     });
 };
-
-// {
-//   "status": "success",
-//   "message": "Profile found",
-//   "data": {
-//     "profile": {
-//       "username": "jolenejolene",
-//       "displayName": "philip",
-//       "Bio": "hi, it's jolenejolene nice to meet you all",
-//       "website": "",
-//       "location": null,
-//       "github_link": "",
-//       "twitter_link": "",
-//       "avatarURL": "https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg",
-//       "headerURL": "https://cdn.pixabay.com/photo/2016/08/30/16/26/banner-1631296__340.jpg",
-//       "followers": null,
-//       "isdeactivated": false
-//     }
-//   }
-// }

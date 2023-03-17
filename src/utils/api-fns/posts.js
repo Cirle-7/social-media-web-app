@@ -77,7 +77,7 @@ export const editPost = (data) => {
       'Content-Type': 'application/json',
       'Allow-Control-Allow-Credentials': 'true',
     },
-    body: `${data.textEdit}`,
+    body: JSON.stringify({ body: data.textEdit }),
   })
     .then((response) => response.json())
     .then((data) => {
