@@ -11,11 +11,7 @@ export const makePost = (newPost) => {
     .then((response) => {
       response.json();
     })
-    .then((data) => {
-      console.log('newPost', newPost);
-      console.log('data', data);
-      return data;
-    });
+    .then((data) => data);
 };
 
 export const getUserPosts = () => {
@@ -68,8 +64,6 @@ export const deletePost = (id) => {
 };
 
 export const editPost = (data) => {
-  console.log('Edit Params', data);
-  console.log({ body: data.textEdit });
   return fetch(`https://www.circle7.codes/api/v1/post/${data.id}`, {
     method: 'PATCH',
     credentials: 'include',
@@ -81,7 +75,6 @@ export const editPost = (data) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('edit response', data);
       return data;
     });
 };

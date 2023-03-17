@@ -15,8 +15,11 @@ const EditPost = ({ id, text }) => {
       if (data.status && (data.status === 'error' || data.status === 'Error')) {
         return toast.error('Error editing post');
       }
-      toast.success('Post edit successful');
-      queryClient.invalidateQueries({ queryKey: ['userPosts'] });
+
+      if (data.status === true) {
+        queryClient.invalidateQueries({ queryKey: ['userPosts'] });
+        return toast.success('Post Edit Successful');
+      }
     },
     onError: () => {
       toast.error('Error sending post');

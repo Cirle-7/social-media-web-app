@@ -12,9 +12,7 @@ export const getUserProfile = (username) => {
 };
 
 export const editDisplayName = (data) => {
-  console.log('displyName', data);
-
-  return fetch(`https://www.circle7.codes/api/v1/users/auth/${data.id}`, {
+  return fetch(`https://www.circle7.codes/api/v1/users/${data.userId}`, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
@@ -25,15 +23,12 @@ export const editDisplayName = (data) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('edit response', data);
       return data;
     });
 };
 
 export const editProfile = (data) => {
-  console.log('profile edit object', data);
-
-  return fetch(`https://www.circle7.codes/api/v1/profiles/${data.id}`, {
+  return fetch(`https://www.circle7.codes/api/v1/profiles/${data.profileId}`, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
@@ -44,7 +39,6 @@ export const editProfile = (data) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('edit profile', data);
       return data;
     });
 };

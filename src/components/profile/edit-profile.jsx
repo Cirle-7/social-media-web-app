@@ -8,13 +8,13 @@ import { toast } from 'react-hot-toast';
 
 const EditProfile = ({ id, profile }) => {
   const queryClient = useQueryClient();
-  const [displayName, setDisplayName] = useState('');
+  const [displayName, setDisplayName] = useState(profile.displayName);
   const [profileEdit, setProfileEdit] = useState({
-    bio: '',
-    website: '',
-    location: '',
-    github_link: 'https://github.com/',
-    twitter_link: 'https://twitter.com/',
+    bio: profile.Bio,
+    website: profile.website,
+    location: profile.location,
+    github_link: profile.github_link,
+    twitter_link: profile.twitter_link,
     avatar: '',
     header: '',
   });
@@ -25,7 +25,9 @@ const EditProfile = ({ id, profile }) => {
       if (data.status && (data.status === 'error' || data.status === 'Error')) {
         return toast.error('Error saving display name');
       }
-      queryClient.invalidateQueries({ queryKey: ['userPosts'] });
+      if (data.status === 'Success') {
+        return queryClient.invalidateQueries({ queryKey: ['userPosts'] });
+      }
     },
     onError: () => {
       toast.error('Error sending post');
@@ -35,7 +37,7 @@ const EditProfile = ({ id, profile }) => {
   const editUserDisplayName = () => {
     if (displayName.trim().length === 0 || id === 0) return;
     editDisplayNameMutation.mutate({
-      id,
+      userId: id,
       displayName,
     });
   };
@@ -46,23 +48,27 @@ const EditProfile = ({ id, profile }) => {
       if (data.status && (data.status === 'error' || data.status === 'Error')) {
         return toast.error('Error editing profile');
       }
-      queryClient.invalidateQueries({ queryKey: ['userProfile'] });
+
+      if (data.status === true) {
+        queryClient.invalidateQueries({ queryKey: ['userProfile'] });
+        return toast.success('Profile Updated.');
+      }
     },
     onError: () => {
-      toast.error('Profile edit failed.');
+      toast.error('Profile Update Failed.');
     },
   });
 
   const editUserProfile = () => {
     if (id === 0) return;
     editProfileMutation.mutate({
-      id,
-      username: profile.username,
+      profileId: profile.id,
       profileEdit,
     });
   };
 
   const saveChanges = () => {
+    editUserDisplayName();
     editUserProfile();
   };
 
@@ -84,21 +90,9 @@ const EditProfile = ({ id, profile }) => {
             Edit profile
           </Dialog.Title>
           <Dialog.Description className=" mt-[10px] mb-5 text-[15px] leading-normal">
-            Make changes to your profile here. Click save when you&apos;re done.
+            Make changes to your profile details here. Click save when
+            you&apos;re done.
           </Dialog.Description>
-          {/* <fieldset className="mb-[15px] flex items-center gap-5">
-            <label
-              className="font-semibold w-[90px] text-right text-[15px]"
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className=" inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-              id="name"
-              defaultValue="Pedro Duarte"
-            />
-          </fieldset> */}
           <fieldset className="mb-[15px] grid gap-2">
             <label className=" font-semibold text-[15px]" htmlFor="username">
               Display Name
@@ -141,7 +135,7 @@ const EditProfile = ({ id, profile }) => {
               placeholder="Location"
             />
           </fieldset>
-          <section className="flex gap-1">
+          <section className="grid md:flex gap-1">
             <fieldset className="mb-[15px] grid gap-2">
               <label className="font-semibold text-[15px]" htmlFor="bio">
                 Github

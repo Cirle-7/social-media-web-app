@@ -3,9 +3,11 @@ import MobileSidebar from '@components/ui/sidebar';
 import { useUser } from '@hooks/use-User';
 import {
   ArrowLeftIcon,
+  GitHubLogoIcon,
   PersonIcon,
   SewingPinIcon,
   TextAlignJustifyIcon,
+  TwitterLogoIcon,
 } from '@radix-ui/react-icons';
 import { useQuery } from '@tanstack/react-query';
 import { getUserPosts } from '@utils/api-fns/posts';
@@ -66,7 +68,8 @@ const Profile = () => {
   const allPosts = data.allPosts;
 
   const profile = profileData.data.profile;
-
+  // console.log('Profile: ', profile);
+  // console.log('User:', userId);
   return (
     <div className="w-[100vw] md:w-[55vw] h-[100vh] overflow-y-scroll scrollbar-hide">
       <section className="relative">
@@ -134,10 +137,30 @@ const Profile = () => {
           <p className="mt-[.3rem] text-[.9rem] flex items-center gap-1 font-semibold text-text-accent">
             {profile.location === null ? null : (
               <>
-                <SewingPinIcon /> Port Harcout, Nigeria
+                <SewingPinIcon /> {profile.location}
               </>
             )}
           </p>
+
+          <ul className="grid gap-2 md:flex md:gap-3 mt-5">
+            {profile.twitter_link !== null ||
+            profile.twitter_link.trim().length > 0 ? (
+              <Link href={profile.twitter_link}>
+                <li className="flex items-center font-semibold text-sm gap-1 underline cursor-pointer">
+                  <TwitterLogoIcon /> {profile.twitter_link}
+                </li>
+              </Link>
+            ) : null}
+
+            {profile.github_link !== null ||
+            profile.github_link.trim().length > 0 ? (
+              <Link href={profile.github_link}>
+                <li className="flex items-center font-semibold text-sm gap-1 underline cursor-pointer">
+                  <GitHubLogoIcon /> {profile.github_link}
+                </li>
+              </Link>
+            ) : null}
+          </ul>
 
           <ul className="flex list-none gap-3 mt-3 font-medium">
             {/* <li>
