@@ -76,17 +76,17 @@ const PostBox = () => {
               <span>Live</span>{' '}
             </li>
             <li className="cursor-pointer grid w-fit">
-              <div class="relative w-fit h-fit flex justify-center items-center">
+              <div className="relative w-fit h-fit flex justify-center items-center">
                 <label htmlFor="file-upload"></label>
                 <input
                   accept="image/*"
-                  class="relative opacity-0 w-[4.3rem] z-10 cursor-pointer"
+                  className="relative opacity-0 w-[4.3rem] z-10 cursor-pointer"
                   type="file"
                   name="file-upload"
                   onChange={(e) => handleFileChange(e)}
                 />
-                <div class="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
-                  <p class="flex items-center gap-1 ">
+                <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
+                  <p className="flex items-center gap-1 ">
                     <ImageIcon />
                     <span>Photos</span>
                   </p>

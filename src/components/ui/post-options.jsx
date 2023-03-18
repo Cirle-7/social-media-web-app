@@ -20,9 +20,7 @@ const PostOptions = ({ id, userId, text }) => {
   });
 
   const deleteUserPost = (id) => {
-    deleteMutation.mutate({
-      id,
-    });
+    deleteMutation.mutate(id);
   };
 
   return (
@@ -30,7 +28,6 @@ const PostOptions = ({ id, userId, text }) => {
       <DropdownMenu.Trigger asChild>
         <button
           className="w-[15px] h-[18px] inline-flex items-center justify-center text-violet11 bg-white  outline-none hover:bg-gray-300"
-          y
           aria-label="Customise options"
         >
           <DotsVerticalIcon />

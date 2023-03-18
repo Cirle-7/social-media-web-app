@@ -7,7 +7,7 @@ import {
 } from '@radix-ui/react-icons';
 import Link from 'next/link';
 
-const SidebarNav = () => {
+const SidebarNav = ({ username }) => {
   return (
     <nav className="bg-accent md:w-fit lg:w-[15vw] p-3 mt-[2rem] ">
       <ul className="sidebar_nav">
@@ -16,7 +16,7 @@ const SidebarNav = () => {
             <HomeIcon /> <span>Home</span>
           </li>
         </Link>
-        <Link href="/profile">
+        <Link href={`profile/${username}`}>
           <li className="flex items-center gap-[1rem] md:gap-[.5rem] cursor-pointer font-semibold">
             <PersonIcon /> <span> Profile</span>
           </li>

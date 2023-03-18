@@ -1,5 +1,7 @@
+import { BASE_URL } from '@utils/constants';
+
 export const getUserProfile = (username) => {
-  return fetch(`https://www.circle7.codes/api/v1/profiles/${username}`, {
+  return fetch(`${BASE_URL}/profiles/${username}`, {
     method: 'GET',
     credentials: 'include',
     headers: {
@@ -12,7 +14,7 @@ export const getUserProfile = (username) => {
 };
 
 export const editDisplayName = (data) => {
-  return fetch(`https://www.circle7.codes/api/v1/users/${data.userId}`, {
+  return fetch(`${BASE_URL}/users/${data.userId}`, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
@@ -28,7 +30,7 @@ export const editDisplayName = (data) => {
 };
 
 export const editProfile = (data) => {
-  return fetch(`https://www.circle7.codes/api/v1/profiles/${data.profileId}`, {
+  return fetch(`${BASE_URL}/profiles/${data.profileId}`, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
@@ -39,6 +41,38 @@ export const editProfile = (data) => {
   })
     .then((response) => response.json())
     .then((data) => {
+      return data;
+    });
+};
+
+export const followUser = (username) => {
+  return fetch(`${BASE_URL}/follow/${username}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Credentials': 'true',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('follow', data);
+      return data;
+    });
+};
+
+export const unfollowUser = (username) => {
+  return fetch(`${BASE_URL}/unfollow/${username}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Credentials': 'true',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('follow', data);
       return data;
     });
 };
