@@ -20,7 +20,7 @@ export default function App({ Component, pageProps, ...appProps }) {
 
   if (
     pathname === '/feed' ||
-    pathname === '/profile' ||
+    pathname.startsWith('/profile') ||
     pathname === '/messages'
   ) {
     return (

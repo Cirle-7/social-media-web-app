@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUserPosts } from '@utils/api-fns/posts';
+import { getAllPosts } from '@utils/api-fns/posts';
 import { useRouter } from 'next/router';
 import PostBox from './postBox';
 import Posts from './posts';
@@ -8,7 +8,7 @@ const Feed = () => {
   const { push } = useRouter();
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ['userPosts'],
-    queryFn: getUserPosts,
+    queryFn: getAllPosts,
   });
 
   console.log('posts', data);

@@ -15,8 +15,11 @@ const EditPost = ({ id, text }) => {
       if (data.status && (data.status === 'error' || data.status === 'Error')) {
         return toast.error('Error editing post');
       }
-      toast.success('Post edit successful');
-      queryClient.invalidateQueries({ queryKey: ['userPosts'] });
+
+      if (data.status === true) {
+        queryClient.invalidateQueries({ queryKey: ['userPosts'] });
+        return toast.success('Post Edit Successful');
+      }
     },
     onError: () => {
       toast.error('Error sending post');
@@ -33,7 +36,11 @@ const EditPost = ({ id, text }) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="group text-[13px] font-semibold leading-none text-back rounded-[3px] flex items-center h-[25px]  relative px-[1rem]  select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none   hover:bg-accent">
+        <button
+          className="group text-[.95rem] font-medium  leading-none text-back rounded-[3px] flex items-center h-[25px] 
+         relative px-[1rem] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none
+         hover:bg-accent w-full"
+        >
           Edit Post
         </button>
       </Dialog.Trigger>

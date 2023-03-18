@@ -45,8 +45,8 @@ function Login({ login }) {
   };
 
   return (
-    <>
-      <div className="pt-48 sm:mt-48 sm:pt-0">
+    <section className="pt-[10rem] sm:mt-[10rem] sm:pt-0">
+      <div className="">
         <h1 className="w-min text-5xl font-bold mx-auto">LOGO</h1>
       </div>
       <div className="w-8/12 mx-auto mt-6">
@@ -54,13 +54,15 @@ function Login({ login }) {
           <Input
             id="email"
             type="email"
+            name="email"
             value={emailState.value}
-            className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
+            className="w-full m-0  h-10 text-sm border-none px-4 bg-gray-500 rounded-lg "
             placeholder="Email Address"
             onChange={emailInputHandler}
           />
           <Input
             id="password"
+            name="pwd"
             value={passwordState.value}
             type="password"
             className="w-full h-10 text-sm border-none px-4 bg-gray-500 rounded-lg"
@@ -88,7 +90,7 @@ function Login({ login }) {
           </Button>
         </form>
       </div>
-    </>
+    </section>
   );
 }
 

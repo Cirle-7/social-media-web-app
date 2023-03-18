@@ -54,7 +54,7 @@ const Post_FeedLayout = ({ children }) => {
         <div className="grid place-items-center py-[1rem]  ">
           <h2>LOGO</h2>
 
-          <SidebarNav />
+          <SidebarNav username={username} />
           <SidebarOptions />
           <div className="mt-[1rem] grid place-items-center gap-1">
             <PersonIcon />

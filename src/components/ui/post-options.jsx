@@ -20,9 +20,7 @@ const PostOptions = ({ id, userId, text }) => {
   });
 
   const deleteUserPost = (id) => {
-    deleteMutation.mutate({
-      id,
-    });
+    deleteMutation.mutate(id);
   };
 
   return (
@@ -30,7 +28,6 @@ const PostOptions = ({ id, userId, text }) => {
       <DropdownMenu.Trigger asChild>
         <button
           className="w-[15px] h-[18px] inline-flex items-center justify-center text-violet11 bg-white  outline-none hover:bg-gray-300"
-          y
           aria-label="Customise options"
         >
           <DotsVerticalIcon />
@@ -43,7 +40,7 @@ const PostOptions = ({ id, userId, text }) => {
           sideOffset={5}
         >
           {user.id === userId ? (
-            <DropdownMenu.Sub className="group text-[.95rem] font-medium leading-none text-back rounded-[3px] flex items-center h-[25px]  relative px-[1rem]  select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none   hover:bg-accent">
+            <DropdownMenu.Sub>
               <EditPost id={id} text={text} />
             </DropdownMenu.Sub>
           ) : null}

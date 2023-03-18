@@ -1,4 +1,12 @@
-_** push to the dev branch/a new branch before merging to main_
+_\*\* push to the dev branch/a new branch before merging to main_
+
+## TODO
+
+[] isMediaQuery hook
+[] new page for opening posts and viewing comments
+[] remove comment dialog on mobile and use the above.
+[] add posting with media.
+[] fix following & followers -> API Errors.
 
 ## File Structure
 
@@ -11,12 +19,13 @@ _** push to the dev branch/a new branch before merging to main_
 </ul>
 
 ## Getting Started
+
 First, run the development server:
 
 ```bash
 yarn dev
 ```
-*The project is engined locked so only yarn works as it's package manager*
+
+_The project is engined locked so only yarn works as it's package manager_
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-

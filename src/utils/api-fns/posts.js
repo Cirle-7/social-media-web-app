@@ -1,5 +1,7 @@
+import { BASE_URL } from '@utils/constants';
+
 export const makePost = (newPost) => {
-  return fetch('https://www.circle7.codes/api/v1/post', {
+  return fetch(`${BASE_URL}/post`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -11,15 +13,24 @@ export const makePost = (newPost) => {
     .then((response) => {
       response.json();
     })
-    .then((data) => {
-      console.log('newPost', newPost);
-      console.log('data', data);
-      return data;
-    });
+    .then((data) => data);
 };
 
-export const getUserPosts = () => {
-  return fetch('https://www.circle7.codes/api/v1/post/', {
+export const getUserPosts = (id) => {
+  return fetch(`${BASE_URL}/post?status=Published&userId=${id}`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Credentials': 'true',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => data);
+};
+
+export const getAllPosts = () => {
+  return fetch(`${BASE_URL}/post`, {
     method: 'GET',
     credentials: 'include',
     headers: {
@@ -32,7 +43,7 @@ export const getUserPosts = () => {
 };
 
 export const likePost = (id) => {
-  return fetch(`https://www.circle7.codes/api/v1/post/like/${id.id}`, {
+  return fetch(`${BASE_URL}/post/like/${id}`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -44,7 +55,7 @@ export const likePost = (id) => {
 };
 
 export const dislikePost = (id) => {
-  return fetch(`https://www.circle7.codes/api/v1/post/like/${id.id}`, {
+  return fetch(`${BASE_URL}/post/like/${id}`, {
     method: 'DELETE',
     credentials: 'include',
     headers: {
@@ -57,7 +68,7 @@ export const dislikePost = (id) => {
 const saveinDraft = () => {};
 
 export const deletePost = (id) => {
-  return fetch(`https://www.circle7.codes/api/v1/post/${id.id}`, {
+  return fetch(`${BASE_URL}/post/${id}`, {
     method: 'DELETE',
     credentials: 'include',
     headers: {
@@ -68,19 +79,86 @@ export const deletePost = (id) => {
 };
 
 export const editPost = (data) => {
-  console.log('Edit Params', data);
-  return fetch(`https://www.circle7.codes/api/v1/post/${data.id}`, {
+  return fetch(`${BASE_URL}/post/${data.id}`, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       'Allow-Control-Allow-Credentials': 'true',
     },
-    body: JSON.stringify(data.textEdit),
+    body: JSON.stringify({ body: data.textEdit }),
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('edit response', data);
+      return data;
+    });
+};
+
+export const sharePost = async (shareObj) => {
+  try {
+    await navigator.share(shareObj);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const makeComment = (data) => {
+  return fetch(`${BASE_URL}/comment/new/${data.postId}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Credentials': 'true',
+    },
+    body: JSON.stringify({ body: data.comment }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    });
+};
+
+export const getAllComments = (data) => {
+  return fetch(`${BASE_URL}/comment/new/${data.postId}`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Credentials': 'true',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    });
+};
+
+export const deleteComment = (data) => {
+  return fetch(`${BASE_URL}/comment/${data.commentId}`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Credentials': 'true',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    });
+};
+
+export const likeComment = (data) => {
+  return fetch(`${BASE_URL}/comment/like/${data.commentId}`, {
+    method: `${data.method}`,
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Credentials': 'true',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
       return data;
     });
 };

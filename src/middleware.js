@@ -20,5 +20,5 @@ export default async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/feed', '/profile', '/messages', '/login', '/signup'],
+  matcher: ['/feed', '/profile/:path*', '/messages', '/login', '/signup'],
 };
